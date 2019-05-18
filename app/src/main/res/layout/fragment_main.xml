@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.gridlayout.widget.GridLayout
+
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="35dp"
+            app:columnCount="2"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <LinearLayout
+
+                android:id="@+id/btn_news"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_news"
+                    tools:srcCompat="@drawable/ic_news"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:text="News"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btn_events"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_events"
+                    tools:srcCompat="@drawable/ic_events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:text="Events"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btn_gtc"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_crc"
+                    tools:srcCompat="@drawable/ic_crc"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Global\nTraining\nCenter"
+                    android:textColor="#fff"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_poll"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_poll"
+                    tools:srcCompat="@drawable/ic_poll"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Poll"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_link"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_link"
+                    tools:srcCompat="@drawable/ic_link"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Links"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_admin"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_admin"
+                    tools:srcCompat="@drawable/ic_admin"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Admin"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_chapters"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_chapters"
+                    tools:srcCompat="@drawable/ic_chapters"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Chapters"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+
+        </androidx.gridlayout.widget.GridLayout>
+
+    </ScrollView>
+</LinearLayout>

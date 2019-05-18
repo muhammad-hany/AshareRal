@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ASHARE RAL</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_navigation_drawer">open navigation drawer</string>
+    <string name="close_navigation_drawer">close navigation drawer</string>
+
+</resources>

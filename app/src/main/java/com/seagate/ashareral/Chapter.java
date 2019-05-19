@@ -1,10 +1,11 @@
 package com.seagate.ashareral;
 
 public class Chapter {
-    String country,location,web,person,email,phone;
+    String country,location,web,person,email,phone,imageDownloadUrl;
     int chapterNumber;
 
-    public Chapter(String country, String location, String web, String person, String email, String phone, int chapterNumber) {
+    public Chapter(String country, String location, String web, String person, String email,
+                   String phone, int chapterNumber,String imageDownloadUrl ) {
         this.country = country;
         this.location = location;
         this.web = web;
@@ -12,8 +13,16 @@ public class Chapter {
         this.email = email;
         this.phone = phone;
         this.chapterNumber = chapterNumber;
+        this.imageDownloadUrl=imageDownloadUrl;
     }
 
+    public String getImageDownloadUrl() {
+        return imageDownloadUrl;
+    }
+
+    public void setImageDownloadUrl(String imageDownloadUrl) {
+        this.imageDownloadUrl = imageDownloadUrl;
+    }
 
     public String getCountry() {
         return country;

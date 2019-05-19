@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class ChaptersAdapter extends BaseAdapter {
@@ -52,12 +54,14 @@ public class ChaptersAdapter extends BaseAdapter {
         }
         Chapter chapter=chapters.get(position);
         countryTextView.setText(chapter.getCountry());
-        chapterNumberTextView.setText(chapter.getChapterNumber());
+        chapterNumberTextView.setText(String.valueOf(chapter.getChapterNumber()));
         locationTextView.setText(chapter.getLocation());
         webTextView.setText(chapter.getWeb());
         personTextView.setText(chapter.getPerson());
         emailTextView.setText(chapter.getEmail());
         phoneTextView.setText(chapter.getPhone());
+        Picasso.get().load(chapter.getImageDownloadUrl()).into(coverImage);
+
 
 
 

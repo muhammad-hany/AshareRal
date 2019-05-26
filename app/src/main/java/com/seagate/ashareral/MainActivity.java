@@ -1,12 +1,14 @@
 package com.seagate.ashareral;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUi();
+        FirebaseMessaging.getInstance().subscribeToTopic("all").addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                Log.v("tag","sdfsd");
+            }else {
+                Log.v("tag","sdfsd");
+            }
+        });
 
 
 

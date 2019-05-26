@@ -36,7 +36,7 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
         view.findViewById(R.id.news).setOnClickListener(this);
         view.findViewById(R.id.events).setOnClickListener(this);
         view.findViewById(R.id.gtc).setOnClickListener(this);
-
+        view.findViewById(R.id.poll).setOnClickListener(this);
         navController = Navigation.findNavController(view);
 
 
@@ -55,7 +55,22 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
             case R.id.events:
                 makeAlertDialogue(Utils.EVENT_KEY);
                 break;
+            case R.id.poll:
+                makePollAlertDialogue();
+                break;
         }
+    }
+
+    private void makePollAlertDialogue() {
+        new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String [] {
+                "Open Poll","Close Poll"}, (dialog, which) -> {
+            switch (which){
+                case 0:
+                    navController.navigate(R.id.toPollAdminFragment);
+                    break;
+
+            }
+        }).create().show();
     }
 
     public void makeAlertDialogue(final String arg) {

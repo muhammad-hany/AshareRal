@@ -1,0 +1,50 @@
+[
+  {
+    "Committee": "CTTC",
+    "name": "Mr. Mohammad Tassi",
+    "title": "RVC CTTC",
+    "bio": "Is a holder of Master's degree in Engineering Management, and Bachelor's degree in Mechanical Engineering. He has also completed many international formal professional training/ education programs in his field."
+  },
+  {
+    "Committee": "GAC",
+    "name": "Mr. Maged Foaud Hashem",
+    "title": "RVC GAC",
+    "bio": "Graduated in 1983 from the faculty of Engineering in Alexandria University, Power Engineering, and has been a professional HVAC engineer since then."
+  },
+  {
+    "Committee": "MPC",
+    "name": "Mr. Mohamed Ibrahim",
+    "title": "RVC MP",
+    "bio": "Mohamed Ibrahim is Control and instrumentation Director in Dc pro engineering Has 20 years' experience in the control & Automation Most in District cooling plant in Addition to various industry such as water & Waste water, cement, paper plant , Food & beverage , For last ten years been as designer & system analysts for HVAC & district cooling process."
+  },
+  {
+    "Committee": "RPC",
+    "name": "Mr. Aakash Patel",
+    "title": "RVC RP",
+    "bio": "Aakash Patel is an Engineer graduated from University of Mumbai in 2004. He completed his Post Graduation in Business Management from T A Pai Management Institute, Manipal in 2008."
+  },
+  {
+    "Committee": "SAC",
+    "name": "Mr. Michel Hayek",
+    "title": "RVC SA",
+    "bio": "Michel Hayek is currently a professor in the Department of Mechanical Engineering and is serving as the Dean of the Faculty of Engineering at Notre Dame University-Louaize, Lebanon, since October 2012."
+  },
+  {
+    "Committee": "YEA",
+    "name": "Mr. Muhammad Omer Khan",
+    "title": "RVC YEA",
+    "bio": "Muhammad Omer Khan is a Mechanical Engineer from the NED University of Engineering and Technology, Karachi, graduating in 2012. He is currently working as a Planning Manager at Shan Associates and works in the design and implementation of HVAC systems."
+  },
+  {
+    "Committee": "Nominating committee",
+    "name": "Mr. Bassel Anbari",
+    "title": "Committee Chair",
+    "bio": "Graduated from Tennessee Technological University USA in 1984 with Bachelor of Science in Mechanical Engineering."
+  },
+  {
+    "Committee": "Refrigeration",
+    "name": "Mr. Arvind Surange",
+    "title": "Refrigeration Chair",
+    "bio": "Has Master's Degree In AC&Ref from University Of Roorkee (Now IIT) In 1963 & Advanced Training In Germany & Denmark."
+  }
+]

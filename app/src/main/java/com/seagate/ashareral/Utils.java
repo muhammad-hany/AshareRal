@@ -38,17 +38,31 @@ public class Utils {
     public static final String CHAPTER_PERSON="Person";
     public static final String CHAPTER_EMAIL="Email";
     public static final String CHAPTER_PHONE="phone";
-    public static final String [] chaptersUrls={"https://firebasestorage.googleapis" +
-            ".com/v0/b/ashare-ral.appspot.com/o/chapters%2F1" +
-            ".jpg?alt=media&token=1a988cfb-db61-4ef9-bdb4-bda0058369c9","https://firebasestorage" +
-            ".googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F2" +
-            ".jpg?alt=media&token=1c4f5ccf-ab3d-4307-bd95-6263a6a3ea69","https://firebasestorage" +
-            ".googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F3" +
-            ".jpg?alt=media&token=2842f277-d2e2-4afd-aac8-104356a98381","https://firebasestorage" +
-            ".googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F4" +
-            ".jpg?alt=media&token=2e901631-7c4e-485e-a719-982d57f12211","https://firebasestorage" +
-            ".googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F5.jpg?alt=media&token=eb5ff38e-91ff-4513-863e-b26278994b72","https://firebasestorage.googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F6.jpg?alt=media&token=d066e296-fed4-460e-9c85-90d837d0c27a","https://firebasestorage.googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F7.jpg?alt=media&token=744dd1a9-5e8d-4d85-9fa2-5bc50947bef8","https://firebasestorage.googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F8.jpg?alt=media&token=f3f37c48-1b9e-4628-9732-b96698db40eb","https://firebasestorage.googleapis.com/v0/b/ashare-ral.appspot.com/o/chapters%2F9.jpg?alt=media&token=a17e4b1b-0baa-448b-9b1e-625812331c0e",};
 
+
+    public static final String RECYCLER_ADAPTER_TYPE="recycler_adapter_type";
+    public static final String CHAPTER_KEY="chapter";
+    public static final String COMMITTEE_KEY="committees";
+    public static final String DLS_KEY="dls";
+    public static final String OFFICERS_KEY="officers";
+
+    public static final String PERSON_NAME="name";
+    public static final String PERSON_BIO="bio";
+    public static final String PERSON_TITLE="title";
+    public static final String PERSON_COMMITTEE="Committee";
+    public static final String PERSON_COURSE="Course Taught";
+    public static final int [] committeesRes={R.drawable.committee1,R.drawable.committee2,
+            R.drawable.committee3,R.drawable.committee4,R.drawable.committee5,
+            R.drawable.committee6,R.drawable.committee7,R.drawable.committee8};
+    public static final int [] dlsRes={R.drawable.dls1,R.drawable.dls2,R.drawable.dls3,
+            R.drawable.dls4,R.drawable.dls5,R.drawable.dls6};
+    public static final int [] officerRes={R.drawable.officer1,R.drawable.officer2,
+            R.drawable.officer3,R.drawable.officer4,R.drawable.officer5,R.drawable.officer6,
+            R.drawable.officer7,R.drawable.officer8,R.drawable.officer9,R.drawable.officer10,
+            R.drawable.officer11,R.drawable.officer12,R.drawable.officer13,R.drawable.officer14,
+            R.drawable.officer15,R.drawable.officer16,R.drawable.officer17};
+
+    public static final String POLL_KEY="poll";
 
     public static long getDate(String stringDate){
 

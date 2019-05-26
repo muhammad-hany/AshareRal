@@ -33,6 +33,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.btn_admin).setOnClickListener(this);
         view.findViewById(R.id.btn_gtc).setOnClickListener(this);
         view.findViewById(R.id.btn_chapters).setOnClickListener(this);
+        view.findViewById(R.id.btn_committee).setOnClickListener(this);
+        view.findViewById(R.id.btn_officers).setOnClickListener(this);
+        view.findViewById(R.id.btn_dls).setOnClickListener(this);
+        view.findViewById(R.id.btn_poll).setOnClickListener(this);
     }
 
 
@@ -59,8 +63,26 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btn_chapters:
-                navController.navigate(R.id.toChaptersFragment);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.CHAPTER_KEY);
+                navController.navigate(R.id.toChaptersFragment,bundle);
+                break;
+            case R.id.btn_committee:
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
+                navController.navigate(R.id.toChaptersFragment,bundle);
+                break;
+            case R.id.btn_dls:
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
+                navController.navigate(R.id.toChaptersFragment,bundle);
+                break;
+            case R.id.btn_officers:
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
+                navController.navigate(R.id.toChaptersFragment,bundle);
+                break;
+            case R.id.btn_poll:
+                navController.navigate(R.id.toPollListFragment);
                 break;
         }
     }
 }
+
+

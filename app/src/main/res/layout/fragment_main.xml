@@ -241,6 +241,100 @@
                     android:textSize="20sp"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/btn_committee"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_committee"
+                    tools:srcCompat="@drawable/ic_committee"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Committee"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_dls"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_dls"
+                    tools:srcCompat="@drawable/ic_dls"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="DLs"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_officers"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:background="@color/defaultColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_columnWeight="0.5">
+
+                <ImageView
+
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:adjustViewBounds="true"
+
+                    app:srcCompat="@drawable/ic_officers"
+                    tools:srcCompat="@drawable/ic_officers"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/rabelo"
+                    android:singleLine="false"
+                    android:text="Officers"
+                    android:textColor="#fff"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+
 
         </androidx.gridlayout.widget.GridLayout>
 

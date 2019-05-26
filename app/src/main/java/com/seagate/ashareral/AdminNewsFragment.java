@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,6 +40,7 @@ public class AdminNewsFragment extends Fragment implements View.OnClickListener 
     private AlertDialog dialog;
     private boolean isItNewNews = true;
     private Bundle bundle;
+    private String token;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,7 +141,7 @@ public class AdminNewsFragment extends Fragment implements View.OnClickListener 
                 .addOnSuccessListener(taskSnapshot -> {
                     dialog.hide();
                     Toast.makeText(getContext(), "upload success", Toast.LENGTH_LONG).show();
-        newsReference.getDownloadUrl().addOnSuccessListener(uri -> uploadObject(uri, finalTimestamp));
+                    newsReference.getDownloadUrl().addOnSuccessListener(uri -> uploadObject(uri, finalTimestamp));
 
 
                 });
@@ -155,21 +154,34 @@ public class AdminNewsFragment extends Fragment implements View.OnClickListener 
 
         News news = new News(body.getText().toString(), title.getText().toString(), timestamp, uri.toString());
 
-        db.collection("news").document(String.valueOf(timestamp)).set(news).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                dialog.hide();
-                navController.navigateUp();
+        db.collection("news").document(String.valueOf(timestamp)).set(news).addOnFailureListener(e -> {
+        }).addOnSuccessListener(aVoid -> {
+            dialog.hide();
+            navController.navigateUp();
+            pushNotification();
 
 
-            }
         });
     }
+
+    private void pushNotification() {
+        /*String SENDER_ID="356922182715";
+        FirebaseMessaging fm = FirebaseMessaging.getInstance();
+        fm.send(new RemoteMessage.Builder(SENDER_ID + "@fcm.googleapis.com")
+                .setMessageId("100")
+                .addData("my_message", "Hello World")
+                .addData("my_action","SAY_HELLO")
+                .build());*/
+
+       /* try {
+            Message.sendCommonMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

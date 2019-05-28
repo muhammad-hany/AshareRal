@@ -79,7 +79,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 navController.navigate(R.id.toChaptersFragment,bundle);
                 break;
             case R.id.btn_poll:
-                navController.navigate(R.id.toPollListFragment);
+                bundle.putString(Utils.POLL_ACTION,Utils.POLL_OPEN);
+                navController.navigate(R.id.toPollListFragment,bundle);
                 break;
         }
     }

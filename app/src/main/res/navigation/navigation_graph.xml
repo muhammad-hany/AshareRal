@@ -83,6 +83,9 @@
         <action
             android:id="@+id/toPollAdminFragment"
             app:destination="@+id/pollAdminFragment"/>
+        <action
+            android:id="@+id/toPollListFragment"
+            app:destination="@id/pollListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/adminEventsFragment"
@@ -107,5 +110,13 @@
         <action
             android:id="@+id/toPollFragment"
             app:destination="@id/pollFragment"/>
+        <action
+            android:id="@+id/toPollDetailsFragment"
+            app:destination="@id/pollDetailsFragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/pollDetailsFragment"
+        android:name="com.seagate.ashareral.PollDetailsFragment"
+        android:label="fragment_poll_details"
+        tools:layout="@layout/fragment_poll_details"/>
 </navigation>

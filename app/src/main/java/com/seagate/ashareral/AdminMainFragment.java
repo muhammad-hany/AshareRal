@@ -68,6 +68,10 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
                 case 0:
                     navController.navigate(R.id.toPollAdminFragment);
                     break;
+                case 1:
+                    Bundle bundle=new Bundle();
+                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_CLOSE);
+                    navController.navigate(R.id.toPollListFragment,bundle);
 
             }
         }).create().show();

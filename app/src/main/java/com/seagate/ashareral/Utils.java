@@ -63,6 +63,12 @@ public class Utils {
             R.drawable.officer15,R.drawable.officer16,R.drawable.officer17};
 
     public static final String POLL_KEY="poll";
+    public static final String POLL_PREFRENCES_KEY ="ral_app_polls";
+    public static final String VOTE_NAME="vote_name";
+    public static final String POLL_ACTION="poll_action";
+    public static final String POLL_OPEN="poll_open";
+    public static final String POLL_CLOSE="poll_close";
+
 
     public static long getDate(String stringDate){
 

@@ -41,7 +41,7 @@ public class PollAdminFragment extends Fragment {
         pollQuestion=view.findViewById(R.id.pollQuestion);
         choice1=view.findViewById(R.id.choice1);
         choice2=view.findViewById(R.id.choice2);
-        choice3=view.findViewById(R.id.choice2);
+        choice3=view.findViewById(R.id.choice3);
         navController= Navigation.findNavController(view);
 
         view.findViewById(R.id.openPoll).setOnClickListener(v -> {
@@ -57,7 +57,7 @@ public class PollAdminFragment extends Fragment {
         long timestamp=System.currentTimeMillis();
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         Poll poll=new Poll(pollQuestion.getText().toString(),choice1.getText().toString(),
-                choice2.getText().toString(),choice3.getText().toString(),timestamp);
+                choice2.getText().toString(),choice3.getText().toString(),timestamp,true);
         db.collection("polls").document(String.valueOf(timestamp)).set(poll).addOnCompleteListener(task -> {
             Toast.makeText(getContext(),"Poll opened !",Toast.LENGTH_SHORT).show();
             navController.navigateUp();

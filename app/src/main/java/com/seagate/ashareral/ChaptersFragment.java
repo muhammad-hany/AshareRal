@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.storage.FirebaseStorage;
 
 import org.json.JSONArray;
@@ -41,7 +42,15 @@ public class ChaptersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(false);
+
+
         bundle = getArguments();
+
+
+
+
         objects = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -54,7 +63,7 @@ public class ChaptersFragment extends Fragment {
 
         if (bundle.getString(Utils.RECYCLER_ADAPTER_TYPE).equals(Utils.CHAPTER_KEY)){
             for (int i = 0; i < 25; i++) {
-                FirebaseStorage.getInstance().getReference().child("objects/" + (i + 1) + ".jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                FirebaseStorage.getInstance().getReference().child("chapters/" + (i + 1) + ".jpg").getDownloadUrl().addOnSuccessListener(uri -> {
                     int position = Integer.valueOf(uri.toString().subSequence(uri.toString().indexOf("F") + 1, uri.toString().indexOf("jpg") - 1).toString());
                     urls[position - 1] = uri.toString();
                     if (j.get() == 25) {

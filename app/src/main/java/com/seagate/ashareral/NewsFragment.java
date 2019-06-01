@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,6 +40,9 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(false);
+
         ListView listView = view.findViewById(R.id.new_list);
         news = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();

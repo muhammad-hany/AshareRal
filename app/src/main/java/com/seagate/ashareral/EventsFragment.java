@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -43,8 +44,9 @@ public class EventsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // final MCalendarView calendarView = view.findViewById(R.id.calendarView);
-        //final CalendarView mCalendarView=view.findViewById(R.id.cosmoCalendar);
+
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(false);
 
         final CalendarView calendarView = view.findViewById(R.id.calendarView);
 

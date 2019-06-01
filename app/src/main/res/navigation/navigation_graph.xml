@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.seagate.ashareral.MainFragment"
-        android:label="fragment_main"
+        android:label="ASHRAE RAL"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/toNewsFragment"
@@ -20,6 +20,15 @@
             android:id="@+id/toChaptersFragment"
             app:destination="@id/ChaptersFragment"/>
         <action
+            android:id="@+id/toCommitteeFragment"
+            app:destination="@id/CommitteeFragment"/>
+        <action
+            android:id="@+id/toDlsFragment"
+            app:destination="@id/DlsFragment"/>
+        <action
+            android:id="@+id/toOfficerFragment"
+            app:destination="@id/OfficerFragment"/>
+        <action
             android:id="@+id/toAdminMainFragment"
             app:destination="@id/adminMainFragment"/>
         <action
@@ -29,7 +38,7 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.seagate.ashareral.NewsFragment"
-        android:label="fragment_news"
+        android:label="News"
         tools:layout="@layout/fragment_news">
         <action
             android:id="@+id/toNewsDetails"
@@ -41,7 +50,7 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.seagate.ashareral.EventsFragment"
-        android:label="fragment_events"
+        android:label="Events"
         tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/action_admin_event"
@@ -50,22 +59,37 @@
     <fragment
         android:id="@+id/ChaptersFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
-        android:label="fragment_chapters"
+        android:label="Chapters"
+        tools:layout="@layout/fragment_chapters"/>
+    <fragment
+        android:id="@+id/CommitteeFragment"
+        android:name="com.seagate.ashareral.ChaptersFragment"
+        android:label="Committee"
+        tools:layout="@layout/fragment_chapters"/>
+    <fragment
+        android:id="@+id/DlsFragment"
+        android:name="com.seagate.ashareral.ChaptersFragment"
+        android:label="DLs"
+        tools:layout="@layout/fragment_chapters"/>
+    <fragment
+        android:id="@+id/OfficerFragment"
+        android:name="com.seagate.ashareral.ChaptersFragment"
+        android:label="Officers"
         tools:layout="@layout/fragment_chapters"/>
     <fragment
         android:id="@+id/adminNewsFragment"
         android:name="com.seagate.ashareral.AdminNewsFragment"
-        android:label="fragment_admin"
+        android:label="Admin Tools"
         tools:layout="@layout/fragment_admin_news"/>
     <fragment
         android:id="@+id/newsDetails"
         android:name="com.seagate.ashareral.NewsDetails"
-        android:label="fragment_news_details"
+        android:label="News"
         tools:layout="@layout/fragment_news_details"/>
     <fragment
         android:id="@+id/adminMainFragment"
         android:name="com.seagate.ashareral.AdminMainFragment"
-        android:label="fragment_admin_menu"
+        android:label="Admin Tools"
         tools:layout="@layout/fragment_admin_main">
         <action
             android:id="@+id/toAdminNewsFragment"
@@ -90,22 +114,22 @@
     <fragment
         android:id="@+id/adminEventsFragment"
         android:name="com.seagate.ashareral.AdminEventsFragment"
-        android:label="fragment_admin_events"
+        android:label="Add Event"
         tools:layout="@layout/fragment_admin_events"/>
     <fragment
         android:id="@+id/pollAdminFragment"
         android:name="com.seagate.ashareral.PollAdminFragment"
-        android:label="fragment_poll_admin"
+        android:label="Add Poll"
         tools:layout="@layout/fragment_poll_admin"/>
     <fragment
         android:id="@+id/pollFragment"
         android:name="com.seagate.ashareral.PollFragment"
-        android:label="fragment_poll"
+        android:label="Polls"
         tools:layout="@layout/fragment_poll"/>
     <fragment
         android:id="@+id/pollListFragment"
         android:name="com.seagate.ashareral.PollListFragment"
-        android:label="fragment_poll_list"
+        android:label="Polls"
         tools:layout="@layout/fragment_poll_list">
         <action
             android:id="@+id/toPollFragment"
@@ -117,6 +141,6 @@
     <fragment
         android:id="@+id/pollDetailsFragment"
         android:name="com.seagate.ashareral.PollDetailsFragment"
-        android:label="fragment_poll_details"
+        android:label="Polls"
         tools:layout="@layout/fragment_poll_details"/>
 </navigation>

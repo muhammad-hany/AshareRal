@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,6 +22,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
@@ -27,6 +31,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController= Navigation.findNavController(view);
+
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(true);
+
 
         view.findViewById(R.id.btn_news).setOnClickListener(this);
         view.findViewById(R.id.btn_events).setOnClickListener(this);
@@ -37,6 +45,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.btn_officers).setOnClickListener(this);
         view.findViewById(R.id.btn_dls).setOnClickListener(this);
         view.findViewById(R.id.btn_poll).setOnClickListener(this);
+
+
+
     }
 
 
@@ -68,15 +79,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_committee:
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
-                navController.navigate(R.id.toChaptersFragment,bundle);
+                navController.navigate(R.id.toCommitteeFragment,bundle);
                 break;
             case R.id.btn_dls:
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
-                navController.navigate(R.id.toChaptersFragment,bundle);
+                navController.navigate(R.id.toDlsFragment,bundle);
                 break;
             case R.id.btn_officers:
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
-                navController.navigate(R.id.toChaptersFragment,bundle);
+                navController.navigate(R.id.toOfficerFragment,bundle);
                 break;
             case R.id.btn_poll:
                 bundle.putString(Utils.POLL_ACTION,Utils.POLL_OPEN);

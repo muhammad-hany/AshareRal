@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,8 @@ public class PollFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(false);
         navController = Navigation.findNavController(view);
         Poll poll = (Poll) getArguments().getSerializable(Utils.POLL_KEY);
         name = getArguments().getString(Utils.VOTE_NAME);

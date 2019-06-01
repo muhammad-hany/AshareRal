@@ -1,14 +1,13 @@
 package com.seagate.ashareral;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,13 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUi();
-        FirebaseMessaging.getInstance().subscribeToTopic("all").addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                Log.v("tag","sdfsd");
-            }else {
-                Log.v("tag","sdfsd");
-            }
-        });
+
 
 
 
@@ -47,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setUi() {
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         drawer=findViewById(R.id.drawer_layout);
         NavigationView navigationView=findViewById(R.id.nav_view);
@@ -75,7 +69,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         CollapsingToolbarLayout collapsingToolbarLayout=
                 findViewById(R.id.collapsing_toolbar_layout);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
+
         NavigationUI.setupWithNavController(collapsingToolbarLayout,toolbar,navController,drawer);
+
+
+
     }
 
     @Override
@@ -120,8 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     protected void navigationHelper(int id){
+
         switch (id){
             case R.id.nav_news:
+
                 navController.navigate(R.id.toNewsFragment);
                 break;
             case R.id.nav_Events:

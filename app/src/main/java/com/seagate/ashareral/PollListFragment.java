@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -48,6 +49,9 @@ public class PollListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(false);
+
         ArrayList<Poll> polls = new ArrayList<>();
         ArrayList<String> questions = new ArrayList<>();
         ListView listView = view.findViewById(R.id.pollListView);
@@ -55,6 +59,7 @@ public class PollListFragment extends Fragment {
         listView.setAdapter(adapter);
 
         navController = Navigation.findNavController(view);
+
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("polls").get().addOnCompleteListener(task -> {

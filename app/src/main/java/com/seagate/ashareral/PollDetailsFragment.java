@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -40,6 +41,9 @@ public class PollDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
+        layout.setExpanded(false);
+
         question = view.findViewById(R.id.questionTextView);
         c1 = view.findViewById(R.id.c1);
         c2 = view.findViewById(R.id.c2);
@@ -93,6 +97,17 @@ public class PollDetailsFragment extends Fragment {
         progressBar1.setProgress(solutions[0]);
         progressBar2.setProgress(solutions[1]);
         progressBar3.setProgress(solutions[2]);
+
+        for(int i=0;i<results.length;i++){
+            results[i].trim();
+            if (!results[i].equals("")) {
+                if (results[i].charAt(results[i].length() - 2) == ',') {
+                    StringBuilder builder = new StringBuilder(results[i]);
+                    builder.deleteCharAt(results[i].length() - 2);
+                    results[i] = builder.toString();
+                }
+            }
+        }
 
         result1.setText(results[0]);
         result2.setText(results[1]);

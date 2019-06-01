@@ -6,337 +6,518 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@drawable/ic_background">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-        <androidx.gridlayout.widget.GridLayout
-
-
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="35dp"
-            app:columnCount="2"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-
-                android:id="@+id/btn_news"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_columnWeight="0.5">
-
-                <ImageView
-
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:adjustViewBounds="true"
-
-                    app:srcCompat="@drawable/ic_news"
-                    tools:srcCompat="@drawable/ic_news"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/grid_element_margin"
+                app:cardBackgroundColor="#1AB26B"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
+
                     android:fontFamily="@font/rabelo"
-                    android:text="News"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:text="Last News From RAL APP Check this out ...."
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+
+                    android:textStyle="bold"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.gridlayout.widget.GridLayout
 
 
-            <LinearLayout
-                android:id="@+id/btn_events"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_columnWeight="0.5">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-                <ImageView
+                app:columnCount="2"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp">
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true"
+                <LinearLayout
 
-                    app:srcCompat="@drawable/ic_events"
-                    tools:srcCompat="@drawable/ic_events"/>
+                    android:id="@+id/btn_news"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
 
-                <TextView
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_columnWeight="0.5">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
+
+                                app:srcCompat="@drawable/ic_news"
+                                tools:srcCompat="@drawable/ic_news"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:text="News"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btn_events"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+
+                    android:orientation="horizontal"
+                    app:layout_columnWeight="0.5">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
+
+                                app:srcCompat="@drawable/ic_events"
+                                tools:srcCompat="@drawable/ic_events"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:text="Events"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btn_gtc"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:text="Events"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_columnWeight="0.5">
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-            <LinearLayout
-                android:id="@+id/btn_gtc"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_columnWeight="0.5">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                <ImageView
+                            <ImageView
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true"
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
 
-                    app:srcCompat="@drawable/ic_crc"
-                    tools:srcCompat="@drawable/ic_crc"/>
+                                app:srcCompat="@drawable/ic_gtc"
+                                tools:srcCompat="@drawable/ic_gtc"/>
 
-                <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="GTC"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_poll"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Global\nTraining\nCenter"
-                    android:textColor="#fff"
-                    android:textSize="18sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
 
-            <LinearLayout
-                android:id="@+id/btn_poll"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_columnWeight="0.5">
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_columnWeight="0.5">
 
-                <ImageView
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    app:srcCompat="@drawable/ic_poll"
-                    tools:srcCompat="@drawable/ic_poll"/>
+                            <ImageView
 
-                <TextView
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
+
+                                app:srcCompat="@drawable/ic_poll"
+                                tools:srcCompat="@drawable/ic_poll"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="Poll"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_link"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Poll"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_columnWeight="0.5">
 
-            <LinearLayout
-                android:id="@+id/btn_link"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_columnWeight="0.5">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                <ImageView
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true"
+                            <ImageView
 
-                    app:srcCompat="@drawable/ic_link"
-                    tools:srcCompat="@drawable/ic_link"/>
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
 
-                <TextView
+                                app:srcCompat="@drawable/ic_link"
+                                tools:srcCompat="@drawable/ic_link"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="Links"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_admin"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Links"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_columnWeight="0.5">
 
-            <LinearLayout
-                android:id="@+id/btn_admin"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_columnWeight="0.5">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                <ImageView
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true"
+                            <ImageView
 
-                    app:srcCompat="@drawable/ic_admin"
-                    tools:srcCompat="@drawable/ic_admin"/>
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
 
-                <TextView
+                                app:srcCompat="@drawable/ic_admin"
+                                tools:srcCompat="@drawable/ic_admin"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="Admin"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btn_chapters"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Admin"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
 
-            <LinearLayout
-                android:id="@+id/btn_chapters"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_columnWeight="0.5">
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_columnWeight="0.5">
 
-                <ImageView
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:adjustViewBounds="true"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    app:srcCompat="@drawable/ic_chapters"
-                    tools:srcCompat="@drawable/ic_chapters"/>
+                            <ImageView
 
-                <TextView
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
+
+                                app:srcCompat="@drawable/ic_chapters"
+                                tools:srcCompat="@drawable/ic_chapters"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="Chapters"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btn_committee"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Chapters"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_columnWeight="0.5">
 
-            <LinearLayout
-                android:id="@+id/btn_committee"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_columnWeight="0.5">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                <ImageView
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:adjustViewBounds="true"
+                            <ImageView
 
-                    app:srcCompat="@drawable/ic_committee"
-                    tools:srcCompat="@drawable/ic_committee"/>
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
 
-                <TextView
+                                app:srcCompat="@drawable/ic_committee"
+                                tools:srcCompat="@drawable/ic_committee"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="Committee"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_dls"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Committee"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_columnWeight="0.5">
 
-            <LinearLayout
-                android:id="@+id/btn_dls"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_columnWeight="0.5">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                <ImageView
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:adjustViewBounds="true"
+                            <ImageView
 
-                    app:srcCompat="@drawable/ic_dls"
-                    tools:srcCompat="@drawable/ic_dls"/>
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
 
-                <TextView
+                                app:srcCompat="@drawable/ic_dls"
+                                tools:srcCompat="@drawable/ic_dls"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="DLs"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btn_officers"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="DLs"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/grid_element_margin"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_columnWeight="0.5">
 
-            <LinearLayout
-                android:id="@+id/btn_officers"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@color/defaultColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_columnWeight="0.5">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="10dp">
 
-                <ImageView
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:adjustViewBounds="true"
+                            <ImageView
 
-                    app:srcCompat="@drawable/ic_officers"
-                    tools:srcCompat="@drawable/ic_officers"/>
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:adjustViewBounds="true"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/rabelo"
-                    android:singleLine="false"
-                    android:text="Officers"
-                    android:textColor="#fff"
-                    android:textSize="20sp"/>
-            </LinearLayout>
+                                app:srcCompat="@drawable/ic_officers"
+                                tools:srcCompat="@drawable/ic_officers"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/rabelo"
+                                android:singleLine="false"
+                                android:text="Officers"
+                                android:textColor="@color/grid_item_text_color"
+                                android:textSize="20sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
 
+            </androidx.gridlayout.widget.GridLayout>
+        </LinearLayout>
 
-        </androidx.gridlayout.widget.GridLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -78,7 +78,7 @@ public class EventsFragment extends Fragment {
                 calendar.setTime(date);
 
 
-                eventDays.add(new EventDay(calendar, R.drawable.ic_events));
+                eventDays.add(new EventDay(calendar, R.drawable.ic_events_drawer));
                 //   calendarView.markDate(year, month, day);
                 markedDates.add(millsecond);
                 eventsDetails.add((String) document.getData().get(Utils.EVENT_DETAILS_KEY));

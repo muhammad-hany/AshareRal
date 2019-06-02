@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+    android:background="#F4F4F4">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,27 +16,49 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/lastNews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/grid_element_margin"
-                app:cardBackgroundColor="#1AB26B"
+                android:animateLayoutChanges="true"
+                android:clickable="true"
+                android:visibility="gone"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    android:fontFamily="@font/rabelo"
-                    android:text="Last News From RAL APP Check this out ...."
-                    android:textColor="#ffff"
-                    android:textSize="20sp"
+                    <TextView
+                        android:id="@+id/lastNewsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                    android:textStyle="bold"/>
+                        android:layout_margin="20dp"
+                        android:fontFamily="@font/rabelo"
+                        android:text="Last News From RAL APP Check this out ...."
+
+                        android:textColor="@color/grid_item_text_color"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="See More"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.gridlayout.widget.GridLayout

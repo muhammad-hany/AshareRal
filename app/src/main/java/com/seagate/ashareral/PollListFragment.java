@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -55,7 +54,8 @@ public class PollListFragment extends Fragment {
         ArrayList<Poll> polls = new ArrayList<>();
         ArrayList<String> questions = new ArrayList<>();
         ListView listView = view.findViewById(R.id.pollListView);
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, questions);
+        PollsAdapter adapter=new PollsAdapter(polls,getActivity());
+
         listView.setAdapter(adapter);
 
         navController = Navigation.findNavController(view);

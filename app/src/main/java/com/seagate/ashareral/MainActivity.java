@@ -1,6 +1,5 @@
 package com.seagate.ashareral;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -69,9 +68,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         CollapsingToolbarLayout collapsingToolbarLayout=
                 findViewById(R.id.collapsing_toolbar_layout);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
+
 
         NavigationUI.setupWithNavController(collapsingToolbarLayout,toolbar,navController,drawer);
+
 
 
 
@@ -92,22 +92,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        /*if (menuItem.getItemId()==R.id.nav_Events){
-            navController.navigate(R.id.toEventsFragment);
-        }else if (menuItem.getItemId()==R.id.nav_news){
-            navController.navigate(R.id.toNewsFragment);
-        }else if (menuItem.getItemId()==R.id.nav_crc){
-            navController.navigate(R.id.toCRCFragment);
-        }*/
+
         navigationHelper(menuItem.getItemId());
 
 
@@ -119,17 +111,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     protected void navigationHelper(int id){
-
+        Bundle bundle=new Bundle();
         switch (id){
             case R.id.nav_news:
 
                 navController.navigate(R.id.toNewsFragment);
                 break;
             case R.id.nav_Events:
-                navController.navigate(R.id.toEventsFragment);
+                bundle.putString(Utils.CALENDAR_KEY,Utils.EVENT_KEY);
+                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
+                navController.navigate(R.id.toEventsFragment,bundle);
                 break;
-            case R.id.nav_crc:
-                navController.navigate(R.id.toChaptersFragment);
+            case R.id.nav_poll:
+                bundle.putString(Utils.POLL_ACTION,Utils.POLL_OPEN);
+                navController.navigate(R.id.toPollListFragment,bundle);
                 break;
         }
     }

@@ -8,6 +8,7 @@
                                                    tools:context=".PollListFragment">
 
     <ListView
+
         android:id="@+id/pollListView"
         android:layout_width="0dp"
         android:layout_height="0dp"

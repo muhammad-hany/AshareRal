@@ -15,11 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:clickable="false"
         android:focusable="false"
         android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardCornerRadius="2dp"
+        card_view:cardCornerRadius="20dp"
         card_view:cardElevation="5dp">
 
         <RelativeLayout
@@ -32,7 +35,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/news_image_list_item"
                 android:layout_centerHorizontal="true"
-                android:text="asdasd"/>
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/rabelo"
+                android:text="asdasd"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/news_image_list_item"

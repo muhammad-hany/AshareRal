@@ -17,6 +17,9 @@
             android:id="@+id/toEventsFragment"
             app:destination="@id/eventsFragment"/>
         <action
+            android:id="@+id/toGTCFragment"
+            app:destination="@id/gtcFragment"/>
+        <action
             android:id="@+id/toChaptersFragment"
             app:destination="@id/ChaptersFragment"/>
         <action
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/toPollListFragment"
             app:destination="@id/pollListFragment"/>
+        <action
+            android:id="@+id/toNewsDetails"
+            app:destination="@id/newsDetails"/>
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -51,6 +57,15 @@
         android:id="@+id/eventsFragment"
         android:name="com.seagate.ashareral.EventsFragment"
         android:label="Events"
+        tools:layout="@layout/fragment_events">
+        <action
+            android:id="@+id/action_admin_event"
+            app:destination="@id/adminEventsFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gtcFragment"
+        android:name="com.seagate.ashareral.EventsFragment"
+        android:label="Global Training Center"
         tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/action_admin_event"

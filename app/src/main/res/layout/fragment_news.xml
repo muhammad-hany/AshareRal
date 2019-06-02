@@ -5,15 +5,17 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".NewsFragment"
-              android:orientation="vertical">
+              android:background="@drawable/ic_background2"
+              android:orientation="vertical"
+              tools:context=".NewsFragment">
 
-    <ListView
-        android:listSelector="@android:color/transparent"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/new_list"
-        android:dividerHeight="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:divider="@drawable/background_transparent"
+        android:dividerHeight="5dp"
+        android:listSelector="@android:color/transparent"/>
 
 
 </LinearLayout>

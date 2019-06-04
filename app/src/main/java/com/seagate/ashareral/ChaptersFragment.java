@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.firebase.storage.FirebaseStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +15,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.annotation.NonNull;
@@ -26,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ChaptersFragment extends Fragment {
 
-    String[] urls = new String[25];
     private ArrayList<Object> objects;
     private ChaptersAdapter adapter;
     private RecyclerView recyclerView;
@@ -42,8 +43,8 @@ public class ChaptersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
-        layout.setExpanded(false);
+        ((AppBarLayout)getActivity().findViewById(R.id.appBarLayout)).setExpanded(true);
+
 
 
         bundle = getArguments();
@@ -60,21 +61,21 @@ public class ChaptersFragment extends Fragment {
 
 
         AtomicInteger j = new AtomicInteger(1);
-
+        getDataFromJson(bundle.getString(Utils.RECYCLER_ADAPTER_TYPE));
         if (bundle.getString(Utils.RECYCLER_ADAPTER_TYPE).equals(Utils.CHAPTER_KEY)){
-            for (int i = 0; i < 25; i++) {
-                FirebaseStorage.getInstance().getReference().child("chapters/" + (i + 1) + ".jpg").getDownloadUrl().addOnSuccessListener(uri -> {
-                    int position = Integer.valueOf(uri.toString().subSequence(uri.toString().indexOf("F") + 1, uri.toString().indexOf("jpg") - 1).toString());
-                    urls[position - 1] = uri.toString();
-                    if (j.get() == 25) {
-                        getDataFromJson(Utils.CHAPTER_KEY);
-                    }
-                    j.getAndIncrement();
-                });
-            }
+            ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.chapters);
+
+        }else if (bundle.getString(Utils.RECYCLER_ADAPTER_TYPE).equals(Utils.COMMITTEE_KEY)){
+
+            ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.committees);
+        }else if (bundle.getString(Utils.RECYCLER_ADAPTER_TYPE).equals(Utils.OFFICERS_KEY)){
+
+            ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.officers);
         }else {
-            getDataFromJson(bundle.getString(Utils.RECYCLER_ADAPTER_TYPE));
+
+            ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.dls);
         }
+
 
 
 
@@ -94,6 +95,7 @@ public class ChaptersFragment extends Fragment {
 
             Person person;
             Chapter chapter;
+            Map<String,String> map=new HashMap<>();
             switch (type) {
                 case Utils.CHAPTER_KEY:
 
@@ -103,8 +105,7 @@ public class ChaptersFragment extends Fragment {
                         chapter = new Chapter(obj.getString(Utils.CHAPTER_COUNTRY),
                                 obj.getString(Utils.CHAPTER_LOCATION), obj.getString(Utils.CHAPTER_WEB),
                                 obj.getString(Utils.CHAPTER_PERSON), obj.getString(Utils.CHAPTER_EMAIL),
-                                obj.getString(Utils.CHAPTER_PHONE), obj.getInt(Utils.CHAPTER_NUMBER),
-                                urls[i]);
+                                obj.getString(Utils.CHAPTER_PHONE), obj.getInt(Utils.CHAPTER_NUMBER));
                         objects.add(chapter);
 
                     }
@@ -112,11 +113,15 @@ public class ChaptersFragment extends Fragment {
                 case Utils.COMMITTEE_KEY:
 
                     objects.clear();
+
                     for (int i = 0; i < jsonArray.length(); i++) {
+
                         JSONObject obj = jsonArray.getJSONObject(i);
+
                         person = new Person(obj.getString(Utils.PERSON_COMMITTEE),
                                 obj.getString(Utils.PERSON_NAME),
-                                obj.getString(Utils.PERSON_TITLE), obj.getString(Utils.PERSON_BIO));
+                                obj.getString(Utils.PERSON_TITLE),
+                                obj.getString(Utils.PERSON_BIO),obj.getString(Utils.PERSON_EMAIL));
                         objects.add(person);
 
                     }
@@ -125,8 +130,10 @@ public class ChaptersFragment extends Fragment {
                     objects.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
-                        person = new Person(obj.getString(Utils.PERSON_NAME),
-                                obj.getString(Utils.PERSON_TITLE), obj.getString(Utils.PERSON_BIO));
+                        person = new Person(obj.getString(Utils.PERSON_EMAIL),
+                                obj.getString(Utils.PERSON_NAME),
+                                obj.getString(Utils.PERSON_TITLE),
+                                obj.getString(Utils.PERSON_BIO));
                         objects.add(person);
 
                     }

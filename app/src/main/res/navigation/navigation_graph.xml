@@ -17,9 +17,6 @@
             android:id="@+id/toEventsFragment"
             app:destination="@id/eventsFragment"/>
         <action
-            android:id="@+id/toGTCFragment"
-            app:destination="@id/gtcFragment"/>
-        <action
             android:id="@+id/toChaptersFragment"
             app:destination="@id/ChaptersFragment"/>
         <action
@@ -40,6 +37,9 @@
         <action
             android:id="@+id/toNewsDetails"
             app:destination="@id/newsDetails"/>
+        <action
+            android:id="@+id/toGTCFragment"
+            app:destination="@id/CRCFragment"/>
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -63,15 +63,6 @@
             app:destination="@id/adminEventsFragment"/>
     </fragment>
     <fragment
-        android:id="@+id/gtcFragment"
-        android:name="com.seagate.ashareral.EventsFragment"
-        android:label="Global Training Center"
-        tools:layout="@layout/fragment_events">
-        <action
-            android:id="@+id/action_admin_event"
-            app:destination="@id/adminEventsFragment"/>
-    </fragment>
-    <fragment
         android:id="@+id/ChaptersFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
         android:label="Chapters"
@@ -79,12 +70,12 @@
     <fragment
         android:id="@+id/CommitteeFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
-        android:label="Committee"
+        android:label="Committees"
         tools:layout="@layout/fragment_chapters"/>
     <fragment
         android:id="@+id/DlsFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
-        android:label="DLs"
+        android:label="Distinguished Lecturers"
         tools:layout="@layout/fragment_chapters"/>
     <fragment
         android:id="@+id/OfficerFragment"
@@ -158,4 +149,9 @@
         android:name="com.seagate.ashareral.PollDetailsFragment"
         android:label="Polls"
         tools:layout="@layout/fragment_poll_details"/>
+    <fragment
+        android:id="@+id/CRCFragment"
+        android:name="com.seagate.ashareral.CRCFragment"
+        android:label="CRC"
+        tools:layout="@layout/fragment_crc"/>
 </navigation>

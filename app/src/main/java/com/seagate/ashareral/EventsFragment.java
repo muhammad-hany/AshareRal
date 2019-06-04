@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -45,8 +47,7 @@ public class EventsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
-        layout.setExpanded(false);
+        ((ImageView) getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.events);
 
         final CalendarView calendarView = view.findViewById(R.id.calendarView);
 
@@ -92,7 +93,8 @@ public class EventsFragment extends Fragment {
         });
 
         calendarView.setOnDayClickListener(eventDay -> {
-
+            eventTitleText.setVisibility(View.GONE);
+            eventDetailsText.setVisibility(View.GONE);
 
             int i = 0;
             for (long markedDate : markedDates) {
@@ -122,11 +124,21 @@ public class EventsFragment extends Fragment {
                             calendarView.setEvents(eventDays);
                             break;
                         case Utils.ACTION_VIEW:
+                            ((AppBarLayout) getActivity().findViewById(R.id.appBarLayout)).setExpanded(false);
+
+
                             eventDetailsText.setText(eventsDetails.get(i));
                             eventDetailsText.setVisibility(View.VISIBLE);
 
                             eventTitleText.setText(eventTitles.get(i));
                             eventTitleText.setVisibility(View.VISIBLE);
+
+
+                            NestedScrollView nestedScrollView = view.findViewById(R.id.eventScroll);
+
+                            nestedScrollView.post(() -> nestedScrollView.fullScroll(View.FOCUS_DOWN));
+
+
                             break;
 
                     }
@@ -135,6 +147,10 @@ public class EventsFragment extends Fragment {
                     //TODO :: handle long text in event body to be scrollable
                     //TODO :: handle thumbnail images in mainFragment "change the resolution !
                     //TODO :: make all upload buttons overflow buttons
+
+
+                }
+                {
 
 
                 }

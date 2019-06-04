@@ -1,50 +1,51 @@
 [
   {
-    "Committee": "CTTC",
+    "Committee": "Chapter Technology Transfer Committee (CTT)",
     "name": "Mr. Mohammad Tassi",
-    "title": "RVC CTTC",
-    "bio": "Is a holder of Master's degree in Engineering Management, and Bachelor's degree in Mechanical Engineering. He has also completed many international formal professional training/ education programs in his field."
+    "title": "CTT Regional Vice Chair",
+    "email": "mohd.tassi@gmail.com",
+    "bio": "This committee provides efficient and effective transfer of current and relevant information throughout the HVAC&R industry to and from the Chapters. CTTC develops and maintains high quality and readily available tools to enable Chapters to offer information and attractive industry-related information and programs to all segments within the HVAC&R industry. CTTC reports to the Members Council."
   },
   {
-    "Committee": "GAC",
+    "Committee": "Government Affairs Committee (GA)",
     "name": "Mr. Maged Foaud Hashem",
-    "title": "RVC GAC",
-    "bio": "Graduated in 1983 from the faculty of Engineering in Alexandria University, Power Engineering, and has been a professional HVAC engineer since then."
+    "title": "GA Regional Vice Chair",
+    "email": "maged@mag-center.com",
+    "bio": "This committee is responsible for organizing ASHRAE members to educate local, state, provincial, and national government bodies and officials in areas of interest to ASHRAE members, and to promote effective cooperation between ASHRAE members and government. The committee works to coordinate government affairs efforts and is responsible for developing the extent and the manner in which ASHRAE implements and pursues actions to influence government affairs and public policy."
   },
   {
-    "Committee": "MPC",
+    "Committee": "Membership Promotion Committee (MP)",
     "name": "Mr. Mohamed Ibrahim",
-    "title": "RVC MP",
-    "bio": "Mohamed Ibrahim is Control and instrumentation Director in Dc pro engineering Has 20 years' experience in the control & Automation Most in District cooling plant in Addition to various industry such as water & Waste water, cement, paper plant , Food & beverage , For last ten years been as designer & system analysts for HVAC & district cooling process."
+    "title": "MP Regional Vice Chair",
+    "email": "aqraa@hotmail.com",
+    "bio": "This committee publicizes the aims, activities, achievements, and scientific and educational purposes of the Society to encourage qualified persons to apply for membership. The committee also monitors the Society's membership demographics and, where appropriate,adjusts,or creates programs to ensure that individuals from all demographic backgrounds are being equally attracted to ASHRAE. This committee reports to Members Council."
   },
   {
-    "Committee": "RPC",
+    "Committee": "Research Promotion Committee (RP)",
     "name": "Mr. Aakash Patel",
-    "title": "RVC RP",
-    "bio": "Aakash Patel is an Engineer graduated from University of Mumbai in 2004. He completed his Post Graduation in Business Management from T A Pai Management Institute, Manipal in 2008."
+    "title": "RP Regional Vice Chair",
+    "email": "aakash@volpaksystems.co.in",
+    "bio": "This committee plans and implements programs within the Society to generate funds to support ASHRAE research, YEA, Education (ALI), ASHRAE Foundation, Scholarships, and the General Fund. This committee reports to Members Council."
   },
   {
-    "Committee": "SAC",
+    "Committee": "Student Activities Committee (SA)",
     "name": "Mr. Michel Hayek",
-    "title": "RVC SA",
-    "bio": "Michel Hayek is currently a professor in the Department of Mechanical Engineering and is serving as the Dean of the Faculty of Engineering at Notre Dame University-Louaize, Lebanon, since October 2012."
+    "title": "SA Regional Vice Chair",
+    "email": "mhayek@ndu.edu.lb",
+    "bio": "This committee develops a comprehensive program for the educational community for the purpose of promoting and encouraging engineering and HVAC&R careers. It administers and promotes student activities at all levels in the educational system. This committee reports to Members Council."
   },
   {
-    "Committee": "YEA",
+    "Committee": "Young Engineers in ASHRAE (YEA)Committee",
     "name": "Mr. Muhammad Omer Khan",
-    "title": "RVC YEA",
-    "bio": "Muhammad Omer Khan is a Mechanical Engineer from the NED University of Engineering and Technology, Karachi, graduating in 2012. He is currently working as a Planning Manager at Shan Associates and works in the design and implementation of HVAC systems."
+    "title": "YEA Regional Vice Chair",
+    "email": "m.umer.khan.329@gmail.com",
+    "bio": "This committee enhances member benefits for young professional ASHRAE members, 35 years old and younger, by identifying activities and services focused on their needs."
   },
   {
-    "Committee": "Nominating committee",
+    "Committee": "Nominating Committee",
     "name": "Mr. Bassel Anbari",
-    "title": "Committee Chair",
-    "bio": "Graduated from Tennessee Technological University USA in 1984 with Bachelor of Science in Mechanical Engineering."
-  },
-  {
-    "Committee": "Refrigeration",
-    "name": "Mr. Arvind Surange",
-    "title": "Refrigeration Chair",
-    "bio": "Has Master's Degree In AC&Ref from University Of Roorkee (Now IIT) In 1963 & Advanced Training In Germany & Denmark."
+    "title": "Nominating Committee Chair",
+    "email": "bassel@intercool.ae",
+    "bio": "This committee selects candidates for elected officers and members of the Board of Directors. This committee reports directly to the ASHRAE membership."
   }
 ]

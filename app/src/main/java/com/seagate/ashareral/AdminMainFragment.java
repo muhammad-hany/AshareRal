@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,6 +35,7 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((AppBarLayout)getActivity().findViewById(R.id.appBarLayout)).setExpanded(false);
         view.findViewById(R.id.news).setOnClickListener(this);
         view.findViewById(R.id.events).setOnClickListener(this);
         view.findViewById(R.id.gtc).setOnClickListener(this);

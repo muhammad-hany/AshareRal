@@ -7,16 +7,38 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_news"
-            android:icon="@drawable/ic_live"
             android:title="News"/>
         <item
             android:id="@+id/nav_Events"
-            android:icon="@drawable/ic_events_drawer"
             android:title="Events"/>
         <item
             android:id="@+id/nav_poll"
-            android:icon="@drawable/ic_poll_drawer"
             android:title="Poll"/>
+        <item
+            android:id="@+id/nav_crc"
+            android:title="CRC"
+            />
+
+        <item
+            android:id="@+id/nav_chapter"
+            android:title="Chapter"
+            />
+        <item
+            android:id="@+id/nav_committees"
+            android:title="Committees"
+            />
+        <item
+            android:id="@+id/nav_dls"
+            android:title="Distinguished Lecturers"
+            />
+        <item
+            android:id="@+id/nav_officers"
+            android:title="Officers"
+            />
+
+        <item
+            android:id="@+id/nav_admin"
+            android:title="Admin Tools"/>
 
     </group>
 

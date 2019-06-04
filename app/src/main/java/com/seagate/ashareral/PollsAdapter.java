@@ -1,7 +1,6 @@
 package com.seagate.ashareral;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,12 +8,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import androidx.cardview.widget.CardView;
+
 public class PollsAdapter extends BaseAdapter{
 
     private ArrayList<Poll> polls;
     private Activity activity;
 
     TextView pollTitle,pollState;
+    CardView cardView;
 
 
     public PollsAdapter(ArrayList<Poll> polls, Activity activity) {
@@ -44,12 +46,16 @@ public class PollsAdapter extends BaseAdapter{
             convertView=activity.getLayoutInflater().inflate(R.layout.polls_item_list,parent,false);
             pollState=convertView.findViewById(R.id.pollState);
             pollTitle=convertView.findViewById(R.id.pollTitle);
+            cardView=convertView.findViewById(R.id.card_view);
         }
         pollTitle.setText(polls.get(position).getQuestion());
         String state=polls.get(position).isItActive() ? "Opened" : "Closed" ;
         pollState.setText(state);
-        int color=polls.get(position).isItActive() ? Color.GREEN : Color.RED ;
-        pollState.setBackgroundColor(color);
+
+        int color=polls.get(position).isItActive() ?
+                activity.getResources().getColor(R.color.poll_closed) :
+                 activity.getResources().getColor(R.color.poll_opened);
+        cardView.setCardBackgroundColor(color);
 
         return convertView;
     }

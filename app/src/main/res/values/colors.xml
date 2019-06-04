@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#009184</color>
     <color name="colorAccent">#042E6C</color>
     <color name="grid_item_text_color">#042E6C</color>
+    <color name="poll_opened">#039719</color>
+    <color name="poll_closed">#FF4949</color>
 </resources>

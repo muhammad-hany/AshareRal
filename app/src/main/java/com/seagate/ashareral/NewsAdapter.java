@@ -19,9 +19,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     private ArrayList<News> news;
     private View.OnClickListener listener;
+    private boolean isItMainFragment=false;
 
     public NewsAdapter(ArrayList<News> news,View.OnClickListener listener) {
         this.news = news;
+        this.listener=listener;
+    }
+
+    public NewsAdapter(View.OnClickListener listener) {
+        isItMainFragment=true;
         this.listener=listener;
     }
 
@@ -29,7 +35,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_list_item, parent, false);
+        int res;
+        if (isItMainFragment) {
+            res=R.layout.main_fragment_list_item;
+        }else {
+            res=R.layout.new_list_item;
+        }
+        View view = LayoutInflater.from(parent.getContext()).inflate(res, parent, false);
         NewsViewHolder holder=new NewsViewHolder(view);
 
 
@@ -38,16 +50,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        Picasso.get().load(news.get(position).getImageUri()).placeholder(R.drawable.plaaceholder).into(holder.imageView);
-        holder.title.setText(news.get(position).getTitle());
-
+        if (isItMainFragment){
+            holder.imageView.setImageResource(Utils.mainFragmentImages[position]);
+            holder.title.setText(Utils.mainFragmentTitles[position]);
+        }else {
+            Picasso.get().load(news.get(position).getImageUri()).placeholder(R.drawable.placeholder).into(holder.imageView);
+            holder.title.setText(news.get(position).getTitle());
+        }
 
 
     }
 
     @Override
     public int getItemCount() {
-        return news.size();
+        if (isItMainFragment){
+            return Utils.mainFragmentTitles.length;
+        }else {
+            return news.size();
+        }
     }
 
 

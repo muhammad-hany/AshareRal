@@ -3,21 +3,25 @@ package com.seagate.ashareral;
 import java.io.Serializable;
 
 public class Poll implements Serializable {
-    private String question,choice1,choice2,choice3;
+    private String question,choice1,choice2,choice3,password;
     private long timestamp;
     private boolean isItActive=true;
 
-    public Poll(String question, String choice1, String choice2, String choice3, long timestamp,
-                boolean isItActive) {
+    public Poll(String question, String choice1, String choice2, String choice3, String password, long timestamp, boolean isItActive) {
         this.question = question;
         this.choice1 = choice1;
         this.choice2 = choice2;
         this.choice3 = choice3;
+        this.password = password;
         this.timestamp = timestamp;
-        this.isItActive=isItActive;
+        this.isItActive = isItActive;
     }
 
     public Poll() {
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public boolean isItActive() {

@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -16,15 +16,19 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 
 public class PollDetailsFragment extends Fragment {
 
     TextView question, c1, c2, c3, progressText1, progressText2, progressText3,result1,result2,
-            result3, stateTextView;
-    ProgressBar progressBar1, progressBar2, progressBar3;
+            result3, stateTextView,totalVotes;
+    ProgressBar progressBar1, progressBar2, progressBar3,loadingProgressBar;
     ArrayList<Vote> votes;
+    CardView cardView;
+    ConstraintLayout constraintLayout;
 
     public PollDetailsFragment() {
         // Required empty public constructor
@@ -41,8 +45,11 @@ public class PollDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
-        layout.setExpanded(false);
+        ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.poll);
+        constraintLayout=view.findViewById(R.id.root);
+        constraintLayout.setVisibility(View.GONE);
+        loadingProgressBar=view.findViewById(R.id.progressBar);
+
 
         question = view.findViewById(R.id.questionTextView);
         c1 = view.findViewById(R.id.c1);
@@ -57,6 +64,8 @@ public class PollDetailsFragment extends Fragment {
         result1=view.findViewById(R.id.result1);
         result2=view.findViewById(R.id.result2);
         result3=view.findViewById(R.id.result3);
+        cardView=view.findViewById(R.id.card_view);
+        totalVotes=view.findViewById(R.id.totalnofvotes);
 
         Poll poll = (Poll) getArguments().getSerializable(Utils.POLL_KEY);
         question.setText(poll.getQuestion());
@@ -65,6 +74,8 @@ public class PollDetailsFragment extends Fragment {
         c3.setText(poll.getChoice3());
         stateTextView =view.findViewById(R.id.state);
         String state=poll.isItActive() ? "Active" : "Closed";
+        int colorRes=poll.isItActive() ? R.color.poll_opened : R.color.poll_closed;
+        cardView.setCardBackgroundColor(getActivity().getResources().getColor(colorRes));
         stateTextView.setText(state);
         votes = new ArrayList<>();
 
@@ -80,6 +91,14 @@ public class PollDetailsFragment extends Fragment {
     }
 
     private void showResult() {
+        constraintLayout.setVisibility(View.VISIBLE);
+        loadingProgressBar.setVisibility(View.GONE);
+        if (votes.size()>2) {
+            totalVotes.setText("Total Votes : " + votes.size() + " Votes");
+        }else {
+            totalVotes.setText("Total Votes : " + votes.size() + " Vote");
+        }
+
         int[] solutions = new int[3];
         String [] results=new String[]{"","",""};
 

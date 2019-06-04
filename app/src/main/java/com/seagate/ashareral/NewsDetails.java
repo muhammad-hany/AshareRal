@@ -39,7 +39,7 @@ public class NewsDetails extends Fragment {
         AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
         layout.setExpanded(false);
 
-        ImageView imageView=view.findViewById(R.id.imageView);
+        ImageView imageView=view.findViewById(R.id.news_image_list_item);
         TextView title=view.findViewById(R.id.title);
         TextView body=view.findViewById(R.id.body);
 

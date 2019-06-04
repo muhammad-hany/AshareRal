@@ -19,7 +19,7 @@ import androidx.navigation.Navigation;
 
 public class PollAdminFragment extends Fragment {
 
-    EditText pollQuestion,choice1,choice2,choice3;
+    EditText pollQuestion,choice1,choice2,choice3,passwordEditText;
     NavController navController;
 
     public PollAdminFragment() {
@@ -43,10 +43,14 @@ public class PollAdminFragment extends Fragment {
         choice2=view.findViewById(R.id.choice2);
         choice3=view.findViewById(R.id.choice3);
         navController= Navigation.findNavController(view);
+        passwordEditText=view.findViewById(R.id.passwordEcitText);
 
         view.findViewById(R.id.openPoll).setOnClickListener(v -> {
-            if (!pollQuestion.getText().toString().isEmpty()&&!choice1.getText().toString().isEmpty()&&!choice2.getText().toString().isEmpty()&&!choice3.getText().toString().isEmpty()){
+            if (!pollQuestion.getText().toString().isEmpty()&&!choice1.getText().toString().isEmpty()&&!choice2.getText().toString().isEmpty()&&!choice3.getText().toString().isEmpty()&&!passwordEditText.getText().toString().isEmpty()){
                 uploadPoll();
+            }else {
+
+                Toast.makeText(getContext(),"All Field must Be Filled !",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -57,7 +61,9 @@ public class PollAdminFragment extends Fragment {
         long timestamp=System.currentTimeMillis();
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         Poll poll=new Poll(pollQuestion.getText().toString(),choice1.getText().toString(),
-                choice2.getText().toString(),choice3.getText().toString(),timestamp,true);
+                choice2.getText().toString(),choice3.getText().toString(),
+                passwordEditText.getText().toString(),
+                timestamp,true);
         db.collection("polls").document(String.valueOf(timestamp)).set(poll).addOnCompleteListener(task -> {
             Toast.makeText(getContext(),"Poll opened !",Toast.LENGTH_SHORT).show();
             navController.navigateUp();

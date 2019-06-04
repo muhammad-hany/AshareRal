@@ -2,25 +2,14 @@ package com.seagate.ashareral;
 
 public class Person {
 
-    String committeeCourse,name,title,bio;
+    String course,name,title,bio, emailCommittee;
 
 
-    /**    @apiNote committeeCourse contractor */
+    /**    @apiNote emailCommittee contractor */
 
-    public Person(String committeeCourse, String name, String title, String bio) {
-
-        this.committeeCourse = committeeCourse;
-        this.name = name;
-        this.title = title;
-        this.bio = bio;
-    }
-
-
-    /**    @apiNote officers contractor */
-
-    public Person(String name, String title, String bio) {
-        //officer
-
+    public Person(String emailCommittee, String name, String title, String bio) {
+        //dls and officers
+        this.emailCommittee = emailCommittee;
         this.name = name;
         this.title = title;
         this.bio = bio;
@@ -30,8 +19,20 @@ public class Person {
 
 
 
-    public String getCommitteeCourse() {
-        return committeeCourse;
+    public Person(String course, String name, String title, String bio, String email) {
+        this.course = course;
+        this.name = name;
+        this.title = title;
+        this.bio = bio;
+        this.emailCommittee = email;
+    }
+
+    public String getEmailCommittee() {
+        return emailCommittee;
+    }
+
+    public String getCourse() {
+        return course;
     }
 
     public String getName() {

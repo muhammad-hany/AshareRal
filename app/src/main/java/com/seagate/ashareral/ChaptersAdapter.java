@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -59,7 +57,8 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
             holder.personTextView.setText(chapter.getPerson());
             holder.emailTextView.setText(chapter.getEmail());
             holder.phoneTextView.setText(chapter.getPhone());
-            Picasso.get().load(chapter.getImageDownloadUrl()).into(holder.coverImage);
+            holder.coverImage.setImageResource(Utils.chaptersRes[position]);
+
         }else if (type.equals(Utils.OFFICERS_KEY)){
             Person person= (Person) objects.get(position);
             holder.personName.setText(person.getName());
@@ -68,25 +67,39 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
             holder.personImage.setImageResource(Utils.officerRes[position]);
             holder.personCommitteeCourse.setVisibility(View.GONE);
             holder.personCommitteeCourse2.setVisibility(View.GONE);
+            holder.personEmail.setText(person.getEmailCommittee());
             holder.personBio.setPaintFlags(0);
-        }else {
+            holder.bioDescibtion.setText("Biography : ");
+        }else if (type.equals(Utils.COMMITTEE_KEY)){
             Person person= (Person) objects.get(position);
             holder.personName.setText(person.getName());
             holder.personTitle.setText(person.getTitle());
             holder.personBio.setText(person.getBio());
-            holder.personCommitteeCourse.setText(person.getCommitteeCourse());
+            holder.personCommitteeCourse.setText(person.getCourse());
+            holder.personEmail.setText(person.getEmailCommittee());
+
             holder.personBio.setPaintFlags(holder.personBio.getPaintFlags() & (~ Paint.UNDERLINE_TEXT_FLAG));
             holder.personBio.setPaintFlags(0);
-            if (type.equals(Utils.COMMITTEE_KEY)){
-                holder.personCommitteeCourse2.setText(Utils.COMMITTEE_KEY+" : ");
-                holder.personImage.setImageResource(Utils.committeesRes[position]);
-            }else {
-                holder.personCommitteeCourse2.setText("Course Tought : ");
-                holder.personImage.setImageResource(Utils.dlsRes[position]);
-                if (person.getCommitteeCourse().equals("")) {
-                    holder.personCommitteeCourse2.setVisibility(View.GONE);
-                }
+            holder.personCommitteeCourse2.setText(Utils.COMMITTEE_KEY+" : ");
+            holder.personImage.setImageResource(Utils.committeesRes[position]);
+            holder.bioDescibtion.setText("Description : ");
+        } else {
+            //dls
+            Person person= (Person) objects.get(position);
+            holder.personName.setText(person.getName());
+            holder.personTitle.setText(person.getTitle());
+            holder.personBio.setText(person.getBio());
+            holder.personCommitteeCourse.setText(person.getEmailCommittee());
+            holder.personBio.setPaintFlags(holder.personBio.getPaintFlags() & (~ Paint.UNDERLINE_TEXT_FLAG));
+            holder.personBio.setPaintFlags(0);
+            holder.personCommitteeCourse2.setText("Course Tought : ");
+            holder.personImage.setImageResource(Utils.dlsRes[position]);
+            holder.personEmail.setVisibility(View.GONE);
+            holder.emailSubtitle.setVisibility(View.GONE);
+            if (person.getEmailCommittee().equals("")) {
+                holder.personCommitteeCourse2.setVisibility(View.GONE);
             }
+
         }
 
     }
@@ -98,7 +111,8 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView countryTextView,chapterNumberTextView,locationTextView,webTextView,
-        personTextView,emailTextView,phoneTextView,webStatic;
+        personTextView,emailTextView,phoneTextView,webStatic,personEmail,bioDescibtion,
+                emailSubtitle;
         TextView personName,personTitle,personBio,personCommitteeCourse,personCommitteeCourse2;
         ImageView coverImage,personImage;
         public MyViewHolder(@NonNull View convertView,String type) {
@@ -112,7 +126,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 personTextView = convertView.findViewById(R.id.person_text);
                 emailTextView = convertView.findViewById(R.id.email_text);
                 phoneTextView = convertView.findViewById(R.id.phone_text);
-                coverImage = convertView.findViewById(R.id.imageView);
+                coverImage = convertView.findViewById(R.id.news_image_list_item);
             }else {
                 personName=convertView.findViewById(R.id.person_name);
                 personBio=convertView.findViewById(R.id.person_bio);
@@ -120,7 +134,10 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 personTitle=convertView.findViewById(R.id.person_title);
                 personCommitteeCourse=convertView.findViewById(R.id.person_committee_course);
                 personCommitteeCourse2=convertView.findViewById(R.id.person_committee_course2);
-                personImage=convertView.findViewById(R.id.imageView);
+                personImage=convertView.findViewById(R.id.news_image_list_item);
+                personEmail=convertView.findViewById(R.id.person_email);
+                emailSubtitle=convertView.findViewById(R.id.emailSubTitle);
+                bioDescibtion=convertView.findViewById(R.id.bioDescibtion);
             }
         }
     }
@@ -223,7 +240,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
         locationTextView.setText(chapter.getLocation());
         webTextView.setText(chapter.getWeb());
         personTextView.setText(chapter.getPerson());
-        emailTextView.setText(chapter.getEmail());
+        emailTextView.setText(chapter.getEmailCommittee());
         phoneTextView.setText(chapter.getPhone());
         Picasso.get().load(chapter.getImageDownloadUrl()).into(coverImage);
 

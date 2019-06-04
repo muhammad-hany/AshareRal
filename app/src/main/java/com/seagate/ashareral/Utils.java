@@ -48,6 +48,7 @@ public class Utils {
 
     public static final String PERSON_NAME="name";
     public static final String PERSON_BIO="bio";
+    public static final String PERSON_EMAIL="email";
     public static final String PERSON_TITLE="title";
     public static final String PERSON_COMMITTEE="Committee";
     public static final String PERSON_COURSE="Course Taught";
@@ -61,6 +62,13 @@ public class Utils {
             R.drawable.officer7,R.drawable.officer8,R.drawable.officer9,R.drawable.officer10,
             R.drawable.officer11,R.drawable.officer12,R.drawable.officer13,R.drawable.officer14,
             R.drawable.officer15,R.drawable.officer16,R.drawable.officer17};
+    public static final int [] chaptersRes={R.drawable.chapter1,R.drawable.chapter2,
+            R.drawable.chapter3,R.drawable.chapter4,R.drawable.chapter5,R.drawable.chapter6,
+            R.drawable.chapter7,R.drawable.chapter8,R.drawable.chapter9,R.drawable.chapter11,
+            R.drawable.chapter12,R.drawable.chapter13,R.drawable.chapter14,R.drawable.chapter15,
+            R.drawable.chapter16,R.drawable.chapter17,R.drawable.chapter18,R.drawable.chapter19,
+            R.drawable.chapter20,R.drawable.chapter21,R.drawable.chapter22,R.drawable.chapter23,
+            R.drawable.chapter24,R.drawable.chapter25};
 
     public static final String POLL_KEY="poll";
     public static final String POLL_PREFRENCES_KEY ="ral_app_polls";
@@ -69,6 +77,18 @@ public class Utils {
     public static final String POLL_OPEN="poll_open";
     public static final String POLL_CLOSE="poll_close";
 
+    public static final String[] mainFragmentTitles={"News","Events","CRC","Polls","Chapters", "Committees", "Distinguished Lecturers","officers"};
+
+    public static int [] mainFragmentImages={R.drawable.news,R.drawable.events,R.drawable.crc,
+            R.drawable.poll,R.drawable.chapters,R.drawable.committees,R.drawable.dls,
+            R.drawable.officers};
+
+
+    public static final String YOUTUBR_LINK="https://www.youtube.com/channel/UCv553Ek9cTelUDd7prNGUrA";
+    public static final String FACEBOOK_LINK="https://www.facebook.com/ashraeral";
+    public static final String TWITTER_LINK="https://twitter.com/ASHRAE_RAL";
+    public static final String LINKEDIN="https://www.linkedin.com/groups/10393084/";
+    public static final String WEB="http://www.ashraeral.org/";
 
     public static long getDate(String stringDate){
 

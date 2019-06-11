@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
+                android:autoLink="all"
                 android:fontFamily="@font/rabelo"
                 android:text="TextView"
                 android:textColor="@color/grid_item_text_color"

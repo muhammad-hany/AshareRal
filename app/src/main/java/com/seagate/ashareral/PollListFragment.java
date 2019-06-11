@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,8 @@ public class PollListFragment extends Fragment {
     private String name;
     private NavController navController;
     ProgressBar progressBar;
+    private Bundle bundle;
+    private FirebaseFirestore db;
 
     public PollListFragment() {
         // Required empty public constructor
@@ -52,6 +55,7 @@ public class PollListFragment extends Fragment {
 
         ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.poll);
         progressBar=view.findViewById(R.id.progressBar);
+        bundle = getArguments();
         ArrayList<Poll> polls = new ArrayList<>();
         ArrayList<String> questions = new ArrayList<>();
         ListView listView = view.findViewById(R.id.pollListView);
@@ -62,15 +66,21 @@ public class PollListFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         db.collection("polls").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    polls.add(document.toObject(Poll.class));
+                    Poll poll=document.toObject(Poll.class);
+                    if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)&& !poll.isItActive()){
+                        continue;
+                    }
+                    polls.add(poll);
                     questions.add(document.toObject(Poll.class).getQuestion());
 
                 }
+                Collections.reverse(polls);
+                Collections.reverse(questions);
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
 
@@ -79,18 +89,18 @@ public class PollListFragment extends Fragment {
 
 
         listView.setOnItemClickListener((parent, view1, position, id) -> {
-            Bundle bundle = getArguments();
+
             if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_CLOSE)) {
                 Poll poll=polls.get(position);
                 poll.setItActive(false);
                 db.collection("polls").document(String.valueOf(poll.getTimestamp())).set(poll).addOnSuccessListener(aVoid ->navController.navigateUp() );
-            } else {
-                SharedPreferences preferences =
-                        getActivity().getSharedPreferences(Utils.POLL_PREFRENCES_KEY, Context.MODE_PRIVATE);
+            } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_OPEN)){
+                SharedPreferences preferences = getActivity().getSharedPreferences(Utils.POLL_PREFRENCES_KEY,
+                        Context.MODE_PRIVATE);
 
                 if (preferences.getBoolean(String.valueOf(polls.get(position).getTimestamp()), false) || !polls.get(position).isItActive()) {
                     // navigate to vote details
-                     bundle = new Bundle();
+
                     bundle.putSerializable(Utils.POLL_KEY,
                             polls.get(position));
                     navController.navigate(R.id.toPollDetailsFragment, bundle);
@@ -100,6 +110,21 @@ public class PollListFragment extends Fragment {
 
 
                 }
+            }else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)){
+
+
+                bundle.putSerializable(Utils.POLL_KEY,polls.get(position));
+                navController.navigate(R.id.toPollAdminFragment, bundle);
+            }else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_DELETE)){
+                Poll poll=polls.get(position);
+                db.collection("polls").document(String.valueOf(poll.getTimestamp())).delete().addOnSuccessListener(aVoid -> {
+                    polls.remove(position);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(),"Poll Deleted !", Toast.LENGTH_SHORT);
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_SHORT);
+                }
+                );
             }
 
         });

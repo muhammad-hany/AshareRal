@@ -38,7 +38,7 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
         ((AppBarLayout)getActivity().findViewById(R.id.appBarLayout)).setExpanded(false);
         view.findViewById(R.id.news).setOnClickListener(this);
         view.findViewById(R.id.events).setOnClickListener(this);
-        view.findViewById(R.id.gtc).setOnClickListener(this);
+
         view.findViewById(R.id.poll).setOnClickListener(this);
         navController = Navigation.findNavController(view);
 
@@ -52,9 +52,6 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
             case R.id.news:
                 makeAlertDialogue(Utils.NEWS_KEY);
                 break;
-            case R.id.gtc:
-                makeAlertDialogue(Utils.GTC_KEY);
-                break;
             case R.id.events:
                 makeAlertDialogue(Utils.EVENT_KEY);
                 break;
@@ -65,16 +62,27 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
     }
 
     private void makePollAlertDialogue() {
+        Bundle bundle=new Bundle();
         new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String [] {
-                "Open Poll","Close Poll"}, (dialog, which) -> {
+                "Create Poll","Close Poll","Edit Active Poll","Delete Poll"}, (dialog, which) -> {
             switch (which){
                 case 0:
-                    navController.navigate(R.id.toPollAdminFragment);
+                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_OPEN);
+                    navController.navigate(R.id.toPollAdminFragment,bundle);
                     break;
                 case 1:
-                    Bundle bundle=new Bundle();
+
                     bundle.putString(Utils.POLL_ACTION,Utils.POLL_CLOSE);
                     navController.navigate(R.id.toPollListFragment,bundle);
+                    break;
+                case 2:
+                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_EDIT);
+                    navController.navigate(R.id.toPollListFragment,bundle);
+                    break;
+                case 3 :
+                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_DELETE);
+                    navController.navigate(R.id.toPollListFragment,bundle);
+                    break;
 
             }
         }).create().show();

@@ -21,8 +21,6 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
-
-
             <ImageView
 
                 android:id="@+id/expandedImage"

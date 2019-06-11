@@ -21,6 +21,7 @@ public class PollAdminFragment extends Fragment {
 
     EditText pollQuestion,choice1,choice2,choice3,passwordEditText;
     NavController navController;
+    private Bundle bundle;
 
     public PollAdminFragment() {
         // Required empty public constructor
@@ -45,6 +46,17 @@ public class PollAdminFragment extends Fragment {
         navController= Navigation.findNavController(view);
         passwordEditText=view.findViewById(R.id.passwordEcitText);
 
+        bundle=getArguments();
+
+        if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)){
+            Poll poll= (Poll) bundle.getSerializable(Utils.POLL_KEY);
+            choice1.setText(poll.getChoice1());
+            choice2.setText(poll.getChoice2());
+            choice3.setText(poll.getChoice3());
+            pollQuestion.setText(poll.getQuestion());
+            passwordEditText.setText(poll.getPassword());
+        }
+
         view.findViewById(R.id.openPoll).setOnClickListener(v -> {
             if (!pollQuestion.getText().toString().isEmpty()&&!choice1.getText().toString().isEmpty()&&!choice2.getText().toString().isEmpty()&&!choice3.getText().toString().isEmpty()&&!passwordEditText.getText().toString().isEmpty()){
                 uploadPoll();
@@ -58,7 +70,12 @@ public class PollAdminFragment extends Fragment {
     }
 
     private void uploadPoll() {
-        long timestamp=System.currentTimeMillis();
+        long timestamp=-1;
+        if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)){
+            timestamp=((Poll)bundle.getSerializable(Utils.POLL_KEY)).getTimestamp();
+        }else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_OPEN)) {
+            timestamp = System.currentTimeMillis();
+        }
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         Poll poll=new Poll(pollQuestion.getText().toString(),choice1.getText().toString(),
                 choice2.getText().toString(),choice3.getText().toString(),

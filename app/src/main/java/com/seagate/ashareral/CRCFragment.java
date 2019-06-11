@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.annotation.NonNull;
@@ -38,5 +39,12 @@ public class CRCFragment extends Fragment {
         ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.crc_cover);
 
         ((CollapsingToolbarLayout)getActivity().findViewById(R.id.collapsing_toolbar_layout)).setExpandedTitleColor(Color.TRANSPARENT);
+        ((AppBarLayout)getActivity().findViewById(R.id.appBarLayout)).setExpanded(true);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((CollapsingToolbarLayout)getActivity().findViewById(R.id.collapsing_toolbar_layout)).setExpandedTitleColor(Color.WHITE);
     }
 }

@@ -58,6 +58,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="32dp"
+                    android:autoLink="all"
                     android:fontFamily="@font/rabelo"
                     android:text="TextView"
                     android:textColor="@color/colorAccent"

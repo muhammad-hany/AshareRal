@@ -29,6 +29,8 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
 
         if (type.equals(Utils.CHAPTER_KEY)){
             resid=R.layout.chapters_list_item;
+        }else if (type.equals(Utils.COMMITTEE_KEY)){
+            resid=R.layout.committee_list_item;
         }else {
             resid=R.layout.person_list_item;
         }
@@ -72,7 +74,18 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
             holder.bioDescibtion.setText("Biography : ");
         }else if (type.equals(Utils.COMMITTEE_KEY)){
             Person person= (Person) objects.get(position);
-            holder.personName.setText(person.getName());
+            holder.title.setText(person.getCourse());
+            holder.describtion.setText(person.getBio());
+            holder.name.setText(person.getName());
+            holder.personPosition.setText(person.getTitle());
+            holder.personImage.setImageResource(Utils.committeesRes[position]);
+            holder.describtion.setPaintFlags(holder.describtion.getPaintFlags() & (~ Paint.UNDERLINE_TEXT_FLAG));
+            holder.personEmail.setText(person.getEmailCommittee());
+
+
+
+
+            /*holder.personName.setText(person.getName());
             holder.personTitle.setText(person.getTitle());
             holder.personBio.setText(person.getBio());
             holder.personCommitteeCourse.setText(person.getCourse());
@@ -82,7 +95,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
             holder.personBio.setPaintFlags(0);
             holder.personCommitteeCourse2.setText(Utils.COMMITTEE_KEY+" : ");
             holder.personImage.setImageResource(Utils.committeesRes[position]);
-            holder.bioDescibtion.setText("Description : ");
+            holder.bioDescibtion.setText("Description : ");*/
         } else {
             //dls
             Person person= (Person) objects.get(position);
@@ -115,6 +128,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 emailSubtitle;
         TextView personName,personTitle,personBio,personCommitteeCourse,personCommitteeCourse2;
         ImageView coverImage,personImage;
+        TextView title,describtion,name,personPosition;
         public MyViewHolder(@NonNull View convertView,String type) {
             super(convertView);
             if (type.equals(Utils.CHAPTER_KEY)) {
@@ -127,6 +141,14 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 emailTextView = convertView.findViewById(R.id.email_text);
                 phoneTextView = convertView.findViewById(R.id.phone_text);
                 coverImage = convertView.findViewById(R.id.news_image_list_item);
+            }else if (type.equals(Utils.COMMITTEE_KEY)){
+                title=convertView.findViewById(R.id.committee);
+                describtion=convertView.findViewById(R.id.decription);
+                name=convertView.findViewById(R.id.name);
+                personPosition=convertView.findViewById(R.id.title);
+                personImage=convertView.findViewById(R.id.imageView);
+                personEmail=convertView.findViewById(R.id.email);
+
             }else {
                 personName=convertView.findViewById(R.id.person_name);
                 personBio=convertView.findViewById(R.id.person_bio);

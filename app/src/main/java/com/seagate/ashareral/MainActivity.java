@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bundle.putString(Utils.POLL_ACTION, Utils.POLL_OPEN);
                 navController.navigate(R.id.toPollListFragment, bundle);
                 break;
-            case R.id.nav_admin:
+            /*case R.id.nav_admin:
                 navController.navigate(R.id.toAdminMainFragment);
-                break;
+                break;*/
             case R.id.nav_crc:
                 bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
                 bundle.putString(Utils.CALENDAR_KEY,Utils.GTC_KEY);

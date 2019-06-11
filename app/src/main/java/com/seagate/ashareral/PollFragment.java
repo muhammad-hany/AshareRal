@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,7 @@ public class PollFragment extends Fragment {
 
 
         ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.poll);
+        ((AppBarLayout)getActivity().findViewById(R.id.appBarLayout)).setExpanded(true);
 
         navController = Navigation.findNavController(view);
         Poll poll = (Poll) getArguments().getSerializable(Utils.POLL_KEY);

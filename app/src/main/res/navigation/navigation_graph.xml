@@ -143,6 +143,9 @@
         <action
             android:id="@+id/toPollDetailsFragment"
             app:destination="@id/pollDetailsFragment"/>
+        <action
+            android:id="@+id/toPollAdminFragment"
+            app:destination="@id/pollAdminFragment"/>
     </fragment>
     <fragment
         android:id="@+id/pollDetailsFragment"

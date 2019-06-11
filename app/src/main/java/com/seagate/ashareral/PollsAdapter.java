@@ -53,8 +53,8 @@ public class PollsAdapter extends BaseAdapter{
         pollState.setText(state);
 
         int color=polls.get(position).isItActive() ?
-                activity.getResources().getColor(R.color.poll_closed) :
-                 activity.getResources().getColor(R.color.poll_opened);
+                activity.getResources().getColor(R.color.poll_opened) :
+                 activity.getResources().getColor(R.color.poll_closed);
         cardView.setCardBackgroundColor(color);
 
         return convertView;

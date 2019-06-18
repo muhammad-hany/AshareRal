@@ -93,15 +93,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public void onRecyclerClick(int i) {
         Bundle bundle=new Bundle();
         switch (i){
-            case 100:
-                bundle.putString(Utils.NEWS_TITLE_KEY, lastNews.getTitle());
-                bundle.putString(Utils.NEWS_BODY_KEY, lastNews.getBody());
-                bundle.putLong(Utils.NEWS_IMAGE_TIME_KEY, lastNews.getImageTimestamp());
-                bundle.putString(Utils.NEWS_IMAGE_URL, lastNews.getImageUri());
-                navController.navigate(R.id.toNewsDetails,bundle);
-
-
-                break;
             case 0:
                 navController.navigate(R.id.toNewsFragment);
                 break;

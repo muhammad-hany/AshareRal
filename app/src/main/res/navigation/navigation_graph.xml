@@ -35,11 +35,13 @@
             android:id="@+id/toPollListFragment"
             app:destination="@id/pollListFragment"/>
         <action
-            android:id="@+id/toNewsDetails"
-            app:destination="@id/newsDetails"/>
-        <action
             android:id="@+id/toGTCFragment"
             app:destination="@id/CRCFragment"/>
+        <action
+            android:id="@+id/toSplashFragment"
+            app:destination="@id/splashFagment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -157,4 +159,21 @@
         android:name="com.seagate.ashareral.CRCFragment"
         android:label="CRC"
         tools:layout="@layout/fragment_crc"/>
+    <fragment
+        android:id="@+id/splashFagment"
+        android:name="com.seagate.ashareral.SplashFagment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/toMainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@+id/mainFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_mainFragment_to_newsDetails2"
+            app:destination="@id/newsDetails"/>
+        <action
+            android:id="@+id/toEventsFragment"
+            app:destination="@id/eventsFragment"/>
+    </fragment>
 </navigation>

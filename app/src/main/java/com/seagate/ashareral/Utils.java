@@ -3,7 +3,9 @@ package com.seagate.ashareral;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -78,7 +80,7 @@ public class Utils {
     public static final String POLL_EDIT = "poll_edit";
     public static final String POLL_DELETE = "poll_delete";
 
-    public static final String[] mainFragmentTitles = {"News", "Events", "CRC", "Polls", "Chapters", "Committees", "Distinguished Lecturers", "officers"};
+    public static final String[] mainFragmentTitles = {"news", "events", "CRC", "poll", "chapters", "committees", "Distinguished Lecturers", "officers"};
 
     public static int[] mainFragmentImages = {R.drawable.news, R.drawable.events, R.drawable.crc,
             R.drawable.poll, R.drawable.chapters, R.drawable.committees, R.drawable.dls,
@@ -91,13 +93,36 @@ public class Utils {
     public static final String LINKEDIN = "https://www.linkedin.com/groups/10393084/";
     public static final String WEB = "http://www.ashraeral.org/";
 
+    public static final String NOTIFICATION_KEY="notification";
+
+
+    public static String dateToString(int day,int month, int year){
+        return day+":"+month+":"+year;
+    }
+
+    public static int[] StringToDateArray(String s){
+        StringBuilder builder=new StringBuilder(s);
+        int x=0;
+        int [] date=new int[3];
+        String [] stringDate=s.split(":");
+        for (String i:stringDate){
+            date[x]= Integer.parseInt(i);
+            x++;
+        }
+
+        return date;
+    }
+
     public static long getDate(String stringDate) {
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         try {
+            Calendar calendar=Calendar.getInstance(TimeZone.getTimeZone("GMT"));
             Date date = dateFormat.parse(stringDate);
-            return date.getTime();
+            calendar.setTime(date);
+            return calendar.getTimeInMillis();
         } catch (ParseException e) {
             e.printStackTrace();
         }

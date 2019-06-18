@@ -91,10 +91,12 @@ public class NewsFragment extends Fragment {
 
     public void recyclerClickAction(int position){
         Bundle bundle = new Bundle();
-        bundle.putString(Utils.NEWS_TITLE_KEY, news.get(position).getTitle());
+        /*bundle.putString(Utils.NEWS_TITLE_KEY, news.get(position).getTitle());
         bundle.putString(Utils.NEWS_BODY_KEY, news.get(position).getBody());
         bundle.putLong(Utils.NEWS_IMAGE_TIME_KEY, news.get(position).getImageTimestamp());
-        bundle.putString(Utils.NEWS_IMAGE_URL, news.get(position).getImageUri());
+        bundle.putString(Utils.NEWS_IMAGE_URL, news.get(position).getImageUri());*/
+
+        bundle.putSerializable(Utils.NEWS_KEY,news.get(position));
 
         if (bundle2!=null && bundle2.getString(Utils.ADMIN_ACTION_KEY).equals(Utils.ACTION_EDIT)) {
             bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);

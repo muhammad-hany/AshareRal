@@ -46,9 +46,10 @@ public class NewsDetails extends Fragment {
 
 
         Bundle bundle=getArguments();
-        Picasso.get().load(bundle.getString(Utils.NEWS_IMAGE_URL)).into(imageView);
+        News news= (News) bundle.getSerializable(Utils.NEWS_KEY);
+        Picasso.get().load(news.getImageUri()).into(imageView);
 
-        title.setText(bundle.getString(Utils.NEWS_TITLE_KEY));
-        body.setText(bundle.getString(Utils.NEWS_BODY_KEY));
+        title.setText(news.getTitle());
+        body.setText(news.getBody());
     }
 }

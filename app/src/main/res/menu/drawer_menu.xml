@@ -36,9 +36,9 @@
             android:title="Officers"
             />
 
-        <!--<item
+        <item
             android:id="@+id/nav_admin"
-            android:title="Admin Tools"/>-->
+            android:title="Admin Tools"/>
 
     </group>
 

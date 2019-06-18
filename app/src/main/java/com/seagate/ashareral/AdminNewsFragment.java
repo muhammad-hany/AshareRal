@@ -20,6 +20,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -67,7 +70,7 @@ public class AdminNewsFragment extends Fragment implements View.OnClickListener 
             title.setText(bundle.getString(Utils.NEWS_TITLE_KEY));
             body.setText(bundle.getString(Utils.NEWS_BODY_KEY));
             Picasso.get().load(bundle.getString(Utils.NEWS_IMAGE_URL)).into(imageView);
-            uploadBtn.setText("Update News");
+            uploadBtn.setText("Update news");
         } else {
             isItNewNews = true;
         }
@@ -141,7 +144,9 @@ public class AdminNewsFragment extends Fragment implements View.OnClickListener 
                 .addOnSuccessListener(taskSnapshot -> {
                     dialog.hide();
                     Toast.makeText(getContext(), "upload success", Toast.LENGTH_LONG).show();
-                    newsReference.getDownloadUrl().addOnSuccessListener(uri -> uploadObject(uri, finalTimestamp));
+                    newsReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                        uploadObject(uri, finalTimestamp);
+                    });
 
 
                 });
@@ -156,29 +161,26 @@ public class AdminNewsFragment extends Fragment implements View.OnClickListener 
 
         db.collection("news").document(String.valueOf(timestamp)).set(news).addOnFailureListener(e -> {
         }).addOnSuccessListener(aVoid -> {
-            dialog.hide();
-            navController.navigateUp();
-            pushNotification();
+            if (isItNewNews) {
+                pushNotification(news);
+            }else {
+                dialog.hide();
+                navController.navigateUp();
+            }
+
 
 
         });
     }
 
-    private void pushNotification() {
-        /*String SENDER_ID="356922182715";
-        FirebaseMessaging fm = FirebaseMessaging.getInstance();
-        fm.send(new RemoteMessage.Builder(SENDER_ID + "@fcm.googleapis.com")
-                .setMessageId("100")
-                .addData("my_message", "Hello World")
-                .addData("my_action","SAY_HELLO")
-                .build());*/
+    private void pushNotification(News news) {
 
-       /* try {
-            Message.sendCommonMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+        Map<String,String> notification=new HashMap<>();
+        notification.put("type",Utils.NEWS_KEY);
+        notification.put("timestamp", String.valueOf(news.getImageTimestamp()));
+        db.collection("notifications").document(String.valueOf(news.getImageTimestamp())).set(notification).addOnCompleteListener(task -> navController.navigateUp());
 
     }
 

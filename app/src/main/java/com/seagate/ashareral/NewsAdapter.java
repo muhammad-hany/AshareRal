@@ -123,9 +123,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
  /* ImageView imageView;
   TextView title;
   Activity activity;
-  ArrayList<News> news;
+  ArrayList<news> news;
 
-  public NewsAdapter(Activity activity, ArrayList<News> news) {
+  public NewsAdapter(Activity activity, ArrayList<news> news) {
     this.activity = activity;
     this.news = news;
   }

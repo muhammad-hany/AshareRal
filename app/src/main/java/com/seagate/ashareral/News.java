@@ -1,6 +1,8 @@
 package com.seagate.ashareral;
 
-public class News {
+import java.io.Serializable;
+
+public class News implements Serializable {
   String title,body,imageUri;
   long imageTimestamp;
 

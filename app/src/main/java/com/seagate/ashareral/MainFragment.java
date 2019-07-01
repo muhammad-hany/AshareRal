@@ -51,7 +51,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
        // getLastNews();
 
         setToolBar();
-        RecyclerView recyclerView=view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView=view.findViewById(R.id.progressBar4);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(layoutManager);
@@ -67,7 +67,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.youtube).setOnClickListener(this);
         view.findViewById(R.id.twitter).setOnClickListener(this);
         view.findViewById(R.id.linkedin).setOnClickListener(this);
-        view.findViewById(R.id.web).setOnClickListener(this);
+        view.findViewById(R.id.bio).setOnClickListener(this);
 
 
 
@@ -109,23 +109,27 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
 
             case 4:
+                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.CHAPTER_KEY);
                 navController.navigate(R.id.toChaptersFragment,bundle);
                 break;
             case 5:
+                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
                 navController.navigate(R.id.toCommitteeFragment,bundle);
                 break;
             case 6:
+                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
                 navController.navigate(R.id.toDlsFragment,bundle);
                 break;
             case 7:
+                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
                 navController.navigate(R.id.toOfficerFragment,bundle);
                 break;
             case 3:
-                bundle.putString(Utils.POLL_ACTION,Utils.POLL_OPEN);
+                bundle.putString(Utils.POLL_ACTION,Utils.POLL_VIEW);
                 navController.navigate(R.id.toPollListFragment,bundle);
                 break;
         }
@@ -163,7 +167,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             case R.id.linkedin:
                 url=Utils.LINKEDIN;
                 break;
-            case R.id.web:
+            case R.id.bio:
                 url=Utils.WEB;
                 break;
             case R.id.twitter:

@@ -11,7 +11,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
 
-        android:id="@+id/recyclerView"
+        android:id="@+id/progressBar4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -32,7 +32,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+        app:layout_constraintTop_toBottomOf="@+id/progressBar4">
 
         <ImageButton
             android:id="@+id/facebook"
@@ -71,7 +71,7 @@
             />
 
         <ImageButton
-            android:id="@+id/web"
+            android:id="@+id/bio"
             android:layout_width="@dimen/social_image_dimension"
             android:layout_height="@dimen/social_image_dimension"
             android:layout_margin="@dimen/social_dimensions"

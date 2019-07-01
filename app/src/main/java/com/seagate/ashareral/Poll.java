@@ -1,23 +1,44 @@
 package com.seagate.ashareral;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Poll implements Serializable {
-    private String question,choice1,choice2,choice3,password;
+    private String question,password;
     private long timestamp;
     private boolean isItActive=true;
+    private List<String> choices;
+    private boolean multiChoice;
+    private boolean published;
 
-    public Poll(String question, String choice1, String choice2, String choice3, String password, long timestamp, boolean isItActive) {
+    public Poll(String question, String password, long timestamp, boolean isItActive,
+                List<String> choices,boolean multiChoice,boolean published) {
+        this.multiChoice =multiChoice;
         this.question = question;
-        this.choice1 = choice1;
-        this.choice2 = choice2;
-        this.choice3 = choice3;
         this.password = password;
         this.timestamp = timestamp;
         this.isItActive = isItActive;
+        this.choices = choices;
+        this.published=published;
     }
 
     public Poll() {
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public boolean isMultiChoice() {
+        return multiChoice;
+    }
+
+    public List<String> getChoices() {
+        return choices;
     }
 
     public String getPassword() {
@@ -36,17 +57,6 @@ public class Poll implements Serializable {
         return question;
     }
 
-    public String getChoice1() {
-        return choice1;
-    }
-
-    public String getChoice2() {
-        return choice2;
-    }
-
-    public String getChoice3() {
-        return choice3;
-    }
 
     public long getTimestamp() {
         return timestamp;

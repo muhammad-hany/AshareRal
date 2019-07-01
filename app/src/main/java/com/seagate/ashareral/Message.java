@@ -175,7 +175,7 @@ public class Message  {
      *//*
     private static JsonObject buildNotificationMessage() {
         JsonObject jNotification = new JsonObject();
-        jNotification.addProperty("title", TITLE);
+        jNotification.addProperty("position", TITLE);
         jNotification.addProperty("body", BODY);
 
         JsonObject jMessage = new JsonObject();

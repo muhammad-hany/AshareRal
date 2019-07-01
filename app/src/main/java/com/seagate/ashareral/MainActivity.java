@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,8 @@ import android.view.View;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavController navController;
     private DrawerLayout drawer;
+    private int chapterCounter;
+    private int officersCounter = 1;
+    private int dlsCounter = 1, committeeCounter = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +40,88 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUi();
         setNotificationService();
 
+     //   organizeDatabase();
 
 
     }
 
-    private void handleNotificationOpen() {
-        Intent intent=getIntent();
-        if (intent!=null) {
+    private void organizeDatabase() {
+        chapterCounter = 1;
+        organizeChapters();
+        organizeOfficers();
+        organizeDls();
+        organizeCommittee();
 
-            if (intent.getStringExtra(Utils.NOTIFICATION_KEY)!=null) {
+
+    }
+
+    private void organizeCommittee() {
+        FirebaseStorage.getInstance().getReference().child("committees").child(committeeCounter +
+                ".png").getDownloadUrl().addOnSuccessListener(uri -> {
+
+            FirebaseDatabase.getInstance().getReference().child("committees").child(String.valueOf(committeeCounter - 1)).child("download_link").setValue(uri.toString()).addOnSuccessListener(aVoid -> {
+                committeeCounter++;
+                if (committeeCounter <= 6) organizeCommittee();
+            }).addOnFailureListener(e -> {
+                Log.v("TAG", e.getMessage());
+            });
+        }).addOnFailureListener(e -> {
+            Log.v("TAG", e.getMessage());
+        });
+    }
+
+    private void organizeDls() {
+        FirebaseStorage.getInstance().getReference().child("dls").child(dlsCounter +
+                ".png").getDownloadUrl().addOnSuccessListener(uri -> {
+
+            FirebaseDatabase.getInstance().getReference().child("dls").child(String.valueOf(dlsCounter - 1)).child("download_link").setValue(uri.toString()).addOnSuccessListener(aVoid -> {
+                dlsCounter++;
+                if (dlsCounter <= 6) organizeDls();
+            }).addOnFailureListener(e -> {
+                Log.v("TAG", e.getMessage());
+            });
+        }).addOnFailureListener(e -> {
+            Log.v("TAG", e.getMessage());
+        });
+    }
+
+    private void organizeOfficers() {
+        FirebaseStorage.getInstance().getReference().child("officers").child(officersCounter +
+                ".png").getDownloadUrl().addOnSuccessListener(uri -> {
+
+            FirebaseDatabase.getInstance().getReference().child("officers").child(String.valueOf(officersCounter - 1)).child("download_link").setValue(uri.toString()).addOnSuccessListener(aVoid -> {
+                officersCounter++;
+                if (officersCounter <= 16) organizeOfficers();
+            }).addOnFailureListener(e -> {
+                Log.v("TAG", e.getMessage());
+            });
+        }).addOnFailureListener(e -> {
+            Log.v("TAG", e.getMessage());
+        });
+    }
+
+    private void organizeChapters() {
+        FirebaseStorage.getInstance().getReference().child("chapters").child(chapterCounter + ".jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+
+            FirebaseDatabase.getInstance().getReference().child("chapters").child(String.valueOf(chapterCounter - 1)).child("download_link").setValue(uri.toString()).addOnSuccessListener(aVoid -> {
+                FirebaseDatabase.getInstance().getReference().child(Utils.CHAPTERS_KEY).child(String.valueOf(chapterCounter - 1)).child("timestamp").setValue(System.currentTimeMillis()).addOnSuccessListener(aVoid1 -> {
+                    chapterCounter++;
+                    if (chapterCounter <= 25) organizeChapters();
+                });
+
+            }).addOnFailureListener(e -> {
+                Log.v("TAG", e.getMessage());
+            });
+        }).addOnFailureListener(e -> {
+            Log.v("TAG", e.getMessage());
+        });
+    }
+
+    private void handleNotificationOpen() {
+        Intent intent = getIntent();
+        if (intent != null) {
+
+            if (intent.getStringExtra(Utils.NOTIFICATION_KEY) != null) {
                 switch (intent.getStringExtra(Utils.NOTIFICATION_KEY)) {
                     case Utils.NEWS_KEY:
                         News news = (News) intent.getSerializableExtra(Utils.NEWS_KEY);
@@ -57,12 +136,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setNotificationService() {
-        Intent intent=new Intent(getApplicationContext(),NotificationService.class);
-        PendingIntent pendingIntent=PendingIntent.getBroadcast(this,12345,intent,0);
-        AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), NotificationService.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 12345, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         /*alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+5000,pendingIntent);*/
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),5000,pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 5000, pendingIntent);
 
 
     }
@@ -79,14 +158,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         navController = Navigation.findNavController(this, R.id.host_fragment);
-        NavGraph navGraph=navController.getGraph();
+        NavGraph navGraph = navController.getGraph();
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
         NavigationUI.setupWithNavController(collapsingToolbarLayout, toolbar, navController, drawer);
 
 
-
         collapsingToolbarLayout.setVisibility(View.GONE);
+
         navController.navigate(R.id.toSplashFragment);
 
 
@@ -97,9 +176,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
-
-
-
 
 
     @Override
@@ -154,25 +230,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navController.navigate(R.id.toAdminMainFragment);
                 break;
             case R.id.nav_crc:
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                bundle.putString(Utils.CALENDAR_KEY,Utils.GTC_KEY);
-                navController.navigate(R.id.toGTCFragment,bundle);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                bundle.putString(Utils.CALENDAR_KEY, Utils.GTC_KEY);
+                navController.navigate(R.id.toGTCFragment, bundle);
                 break;
             case R.id.nav_chapter:
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.CHAPTER_KEY);
-                navController.navigate(R.id.toChaptersFragment,bundle);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.CHAPTER_KEY);
+                navController.navigate(R.id.toChaptersFragment, bundle);
                 break;
             case R.id.nav_committees:
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
-                navController.navigate(R.id.toCommitteeFragment,bundle);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.COMMITTEE_KEY);
+                navController.navigate(R.id.toCommitteeFragment, bundle);
                 break;
             case R.id.nav_dls:
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
-                navController.navigate(R.id.toDlsFragment,bundle);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.DLS_KEY);
+                navController.navigate(R.id.toDlsFragment, bundle);
                 break;
             case R.id.nav_officers:
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
-                navController.navigate(R.id.toOfficerFragment,bundle);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.OFFICERS_KEY);
+                navController.navigate(R.id.toOfficerFragment, bundle);
                 break;
 
         }

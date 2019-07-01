@@ -1,12 +1,16 @@
 package com.seagate.ashareral;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class News implements Serializable {
-  String title,body,imageUri;
+public class News implements Serializable,Comparable<News> {
+  String title,body,imageUri,date;
   long imageTimestamp;
 
-    public News(String body,String title, long imageTimestamp,String imageUri) {
+    public News(String body,String title, long imageTimestamp,String imageUri,String date) {
+        this.date=date;
         this.title = title;
         this.body = body;
         this.imageUri = imageUri;
@@ -14,6 +18,10 @@ public class News implements Serializable {
     }
 
     public News() {
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getTitle() {
@@ -46,5 +54,17 @@ public class News implements Serializable {
 
     public void setImageTimestamp(long imageTimestamp) {
         this.imageTimestamp = imageTimestamp;
+    }
+
+    @Override
+    public int compareTo(News o) {
+        SimpleDateFormat format=new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date=format.parse(o.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return Utils.getDate(getDate()).compareTo(Utils.getDate(o.getDate()));
     }
 }

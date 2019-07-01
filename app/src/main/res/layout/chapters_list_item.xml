@@ -206,10 +206,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:autoLink="all"
                     android:id="@+id/phone_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:autoLink="all"
                     android:fontFamily="@font/rabelo"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"

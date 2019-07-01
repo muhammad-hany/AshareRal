@@ -42,6 +42,7 @@ public class NewsDetails extends Fragment {
         ImageView imageView=view.findViewById(R.id.news_image_list_item);
         TextView title=view.findViewById(R.id.title);
         TextView body=view.findViewById(R.id.body);
+        TextView date=view.findViewById(R.id.date);
 
 
 
@@ -51,5 +52,6 @@ public class NewsDetails extends Fragment {
 
         title.setText(news.getTitle());
         body.setText(news.getBody());
+        date.setText(news.getDate());
     }
 }

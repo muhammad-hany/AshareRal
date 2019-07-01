@@ -86,6 +86,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             convertView.setTag(this);
             convertView.setOnClickListener(listener);
 
+
         }
 
 
@@ -121,7 +122,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
 
  /* ImageView imageView;
-  TextView title;
+  TextView position;
   Activity activity;
   ArrayList<news> news;
 
@@ -150,12 +151,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     if (convertView==null){
       convertView=activity.getLayoutInflater().inflate(R.layout.new_list_item,parent,false);
       imageView=convertView.findViewById(R.id.news_image_list_item);
-      title=convertView.findViewById(R.id.title);
+      position=convertView.findViewById(R.id.position);
 
     }
 
     Picasso.get().load(news.get(position).getImageUri()).into(imageView);
-    title.setText(news.get(position).getTitle());
+    position.setText(news.get(position).getTitle());
 
     return convertView;
   }*/

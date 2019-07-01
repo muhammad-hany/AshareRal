@@ -36,6 +36,8 @@ public class PollListFragment extends Fragment {
     ProgressBar progressBar;
     private Bundle bundle;
     private FirebaseFirestore db;
+    ArrayList<Poll> polls;
+    private PollsAdapter adapter;
 
     public PollListFragment() {
         // Required empty public constructor
@@ -53,13 +55,13 @@ public class PollListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.poll);
-        progressBar=view.findViewById(R.id.progressBar);
+        ((ImageView) getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.poll);
+        progressBar = view.findViewById(R.id.progressBar4);
         bundle = getArguments();
-        ArrayList<Poll> polls = new ArrayList<>();
+        polls = new ArrayList<>();
         ArrayList<String> questions = new ArrayList<>();
         ListView listView = view.findViewById(R.id.pollListView);
-        PollsAdapter adapter=new PollsAdapter(polls,getActivity());
+        adapter = new PollsAdapter(polls, getActivity());
 
         listView.setAdapter(adapter);
 
@@ -71,12 +73,26 @@ public class PollListFragment extends Fragment {
             if (task.isSuccessful()) {
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    Poll poll=document.toObject(Poll.class);
-                    if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)&& !poll.isItActive()){
-                        continue;
+                    Poll poll = document.toObject(Poll.class);
+                    if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_VIEW) && poll.isItActive() && poll.isPublished()) {
+                        polls.add(poll);
+                        questions.add(document.toObject(Poll.class).getQuestion());
+                    } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT) && poll.isItActive()) {
+                        polls.add(poll);
+                        questions.add(document.toObject(Poll.class).getQuestion());
+                    } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_CLOSE) && poll.isItActive() && poll.isItActive()) {
+                        polls.add(poll);
+                        questions.add(document.toObject(Poll.class).getQuestion());
+                    } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_PUBLISH) && poll.isItActive() && !poll.isPublished()) {
+                        polls.add(poll);
+                        questions.add(document.toObject(Poll.class).getQuestion());
+                    } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_HIDE) && poll.isPublished()) {
+                        polls.add(poll);
+                        questions.add(document.toObject(Poll.class).getQuestion());
+                    } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_DELETE)) {
+                        polls.add(poll);
+                        questions.add(document.toObject(Poll.class).getQuestion());
                     }
-                    polls.add(poll);
-                    questions.add(document.toObject(Poll.class).getQuestion());
 
                 }
                 Collections.reverse(polls);
@@ -91,10 +107,13 @@ public class PollListFragment extends Fragment {
         listView.setOnItemClickListener((parent, view1, position, id) -> {
 
             if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_CLOSE)) {
-                Poll poll=polls.get(position);
+                Poll poll = polls.get(position);
                 poll.setItActive(false);
-                db.collection("polls").document(String.valueOf(poll.getTimestamp())).set(poll).addOnSuccessListener(aVoid ->navController.navigateUp() );
-            } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_OPEN)){
+                db.collection("polls").document(String.valueOf(poll.getTimestamp())).set(poll).addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Poll Is Closed !", Toast.LENGTH_SHORT).show();
+                    navController.navigateUp();
+                });
+            } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_VIEW)) {
                 SharedPreferences preferences = getActivity().getSharedPreferences(Utils.POLL_PREFRENCES_KEY,
                         Context.MODE_PRIVATE);
 
@@ -110,26 +129,68 @@ public class PollListFragment extends Fragment {
 
 
                 }
-            }else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)){
+            } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_EDIT)) {
 
 
-                bundle.putSerializable(Utils.POLL_KEY,polls.get(position));
+                bundle.putSerializable(Utils.POLL_KEY, polls.get(position));
                 navController.navigate(R.id.toPollAdminFragment, bundle);
-            }else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_DELETE)){
-                Poll poll=polls.get(position);
-                db.collection("polls").document(String.valueOf(poll.getTimestamp())).delete().addOnSuccessListener(aVoid -> {
-                    polls.remove(position);
-                    adapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(),"Poll Deleted !", Toast.LENGTH_SHORT);
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(),e.getMessage(), Toast.LENGTH_SHORT);
-                }
-                );
+            } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_DELETE)) {
+                progressBar.setVisibility(View.VISIBLE);
+                Poll poll = polls.get(position);
+                getVotes(poll, position);
+
+
+            } else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_PUBLISH)) {
+                Poll poll = polls.get(position);
+                poll.setPublished(true);
+                db.collection("polls").document(String.valueOf(poll.getTimestamp())).set(poll).addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Poll is published !", Toast.LENGTH_SHORT).show();
+
+                });
+            }else if (bundle.getString(Utils.POLL_ACTION).equals(Utils.POLL_HIDE)){
+                Poll poll = polls.get(position);
+                poll.setPublished(false);
+                db.collection("polls").document(String.valueOf(poll.getTimestamp())).set(poll).addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Poll is hidden !", Toast.LENGTH_SHORT).show();
+                });
             }
 
         });
 
 
+    }
+
+    private void getVotes(Poll poll, int position) {
+        ArrayList<Vote> votes = new ArrayList<>();
+        db.collection("polls").document(String.valueOf(poll.getTimestamp())).collection("votes").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                votes.add(documentSnapshot.toObject(Vote.class));
+            }
+            deleteVotes(poll, 0, votes, position);
+        });
+    }
+
+    private void deleteVotes(Poll poll, int i, ArrayList<Vote> votes, int position) {
+        if (i < votes.size()) {
+            db.collection("polls").document(String.valueOf(poll.getTimestamp())).collection(
+                    "votes").document(String.valueOf(votes.get(i).getTimestamp())).delete().addOnSuccessListener(aVoid -> {
+                int x = i + 1;
+                deleteVotes(poll, x, votes, position);
+
+            });
+        } else {
+            //delete poll
+            db.collection("polls").document(String.valueOf(poll.getTimestamp())).delete().addOnSuccessListener(aVoid -> {
+                polls.remove(position);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Poll Deleted !", Toast.LENGTH_SHORT);
+                progressBar.setVisibility(View.GONE);
+            }).addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT);
+
+                    }
+            );
+        }
     }
 
 
@@ -139,7 +200,7 @@ public class PollListFragment extends Fragment {
         alertDialog.setTitle("Insert Your Name");
         View dialogView = getLayoutInflater().inflate(R.layout.poll_alert_dialog, null);
         EditText nameEditText = dialogView.findViewById(R.id.nameEditText);
-        EditText passwordEditText=dialogView.findViewById(R.id.passwordEditText);
+        EditText passwordEditText = dialogView.findViewById(R.id.passwordEditText);
         Button button = dialogView.findViewById(R.id.dialogOk);
         button.setOnClickListener(v -> {
             if (passwordEditText.getText().toString().equals(poll.getPassword())) {
@@ -153,7 +214,7 @@ public class PollListFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Type your name first !", Toast.LENGTH_SHORT).show();
                 }
-            }else {
+            } else {
                 Toast.makeText(getContext(), "Wrong Password !", Toast.LENGTH_SHORT).show();
             }
         });

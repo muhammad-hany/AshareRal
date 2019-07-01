@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -15,11 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyViewHolder> {
     ArrayList<Object> objects;
     String type;
+    public View.OnClickListener listener;
 
-
-    public ChaptersAdapter(ArrayList<Object> objects,String type ) {
+    public ChaptersAdapter(ArrayList<Object> objects,String type ,View.OnClickListener listener ) {
         this.objects =objects;
         this.type=type;
+        this.listener=listener;
+    }
+
+    public ChaptersAdapter(ArrayList<Object> objects,String type  ) {
+        this.objects =objects;
+        this.type=type;
+        ;
     }
 
     @NonNull
@@ -59,28 +68,32 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
             holder.personTextView.setText(chapter.getPerson());
             holder.emailTextView.setText(chapter.getEmail());
             holder.phoneTextView.setText(chapter.getPhone());
-            holder.coverImage.setImageResource(Utils.chaptersRes[position]);
+            Picasso.get().load(chapter.getDownload_link()).placeholder(R.drawable.placeholder).into(holder.coverImage);
+
+            /*holder.coverImage.setImageResource(Utils.chaptersRes[position]);*/
 
         }else if (type.equals(Utils.OFFICERS_KEY)){
-            Person person= (Person) objects.get(position);
-            holder.personName.setText(person.getName());
-            holder.personTitle.setText(person.getTitle());
-            holder.personBio.setText(person.getBio());
-            holder.personImage.setImageResource(Utils.officerRes[position]);
+
+            Officer officer= (Officer) objects.get(position);
+            holder.personName.setText(officer.getName());
+            holder.personTitle.setText(officer.getPosition());
+            holder.personBio.setText(officer.getBio());
+            Picasso.get().load(officer.getDownload_link()).placeholder(R.drawable.placeholder).into(holder.personImage);
             holder.personCommitteeCourse.setVisibility(View.GONE);
             holder.personCommitteeCourse2.setVisibility(View.GONE);
-            holder.personEmail.setText(person.getEmailCommittee());
+            holder.personEmail.setText(officer.getEmail());
             holder.personBio.setPaintFlags(0);
             holder.bioDescibtion.setText("Biography : ");
         }else if (type.equals(Utils.COMMITTEE_KEY)){
-            Person person= (Person) objects.get(position);
-            holder.title.setText(person.getCourse());
+
+            Committee person= (Committee) objects.get(position);
+            holder.title.setText(person.getCommittee());
             holder.describtion.setText(person.getBio());
             holder.name.setText(person.getName());
-            holder.personPosition.setText(person.getTitle());
-            holder.personImage.setImageResource(Utils.committeesRes[position]);
+            holder.personPosition.setText(person.getPosition());
+            Picasso.get().load(person.getDownload_link()).placeholder(R.drawable.placeholder).into(holder.personImage);
             holder.describtion.setPaintFlags(holder.describtion.getPaintFlags() & (~ Paint.UNDERLINE_TEXT_FLAG));
-            holder.personEmail.setText(person.getEmailCommittee());
+            holder.personEmail.setText(person.getEmail());
 
 
 
@@ -98,18 +111,20 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
             holder.bioDescibtion.setText("Description : ");*/
         } else {
             //dls
-            Person person= (Person) objects.get(position);
-            holder.personName.setText(person.getName());
-            holder.personTitle.setText(person.getTitle());
-            holder.personBio.setText(person.getBio());
-            holder.personCommitteeCourse.setText(person.getEmailCommittee());
+
+            Dls dls= (Dls) objects.get(position);
+            holder.personName.setText(dls.getName());
+            holder.personTitle.setText(dls.getPosition());
+            holder.personBio.setText(dls.getBio());
+            holder.personCommitteeCourse.setText(dls.getCouseTought());
             holder.personBio.setPaintFlags(holder.personBio.getPaintFlags() & (~ Paint.UNDERLINE_TEXT_FLAG));
             holder.personBio.setPaintFlags(0);
             holder.personCommitteeCourse2.setText("Course Tought : ");
-            holder.personImage.setImageResource(Utils.dlsRes[position]);
+
+            Picasso.get().load(dls.getDownload_link()).placeholder(R.drawable.placeholder).into(holder.personImage);
             holder.personEmail.setVisibility(View.GONE);
             holder.emailSubtitle.setVisibility(View.GONE);
-            if (person.getEmailCommittee().equals("")) {
+            if (dls.getCouseTought().equals("")) {
                 holder.personCommitteeCourse2.setVisibility(View.GONE);
             }
 
@@ -122,15 +137,19 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
         return objects.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public  class MyViewHolder extends RecyclerView.ViewHolder{
         TextView countryTextView,chapterNumberTextView,locationTextView,webTextView,
         personTextView,emailTextView,phoneTextView,webStatic,personEmail,bioDescibtion,
                 emailSubtitle;
         TextView personName,personTitle,personBio,personCommitteeCourse,personCommitteeCourse2;
         ImageView coverImage,personImage;
         TextView title,describtion,name,personPosition;
+
+
         public MyViewHolder(@NonNull View convertView,String type) {
             super(convertView);
+
+
             if (type.equals(Utils.CHAPTER_KEY)) {
                 webStatic = convertView.findViewById(R.id.person_committee_course);
                 countryTextView = convertView.findViewById(R.id.person_name);
@@ -141,6 +160,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 emailTextView = convertView.findViewById(R.id.email_text);
                 phoneTextView = convertView.findViewById(R.id.phone_text);
                 coverImage = convertView.findViewById(R.id.news_image_list_item);
+
             }else if (type.equals(Utils.COMMITTEE_KEY)){
                 title=convertView.findViewById(R.id.committee);
                 describtion=convertView.findViewById(R.id.decription);
@@ -160,6 +180,11 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 personEmail=convertView.findViewById(R.id.person_email);
                 emailSubtitle=convertView.findViewById(R.id.emailSubTitle);
                 bioDescibtion=convertView.findViewById(R.id.bioDescibtion);
+            }
+
+            if (listener!=null){
+                convertView.setOnClickListener(listener);
+                convertView.setTag(this);
             }
         }
     }

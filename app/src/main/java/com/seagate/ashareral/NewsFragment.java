@@ -69,6 +69,7 @@ public class NewsFragment extends Fragment {
 
 
                 }
+                Collections.sort(news );
                 Collections.reverse(news );
                 adapter.notifyDataSetChanged();
             }

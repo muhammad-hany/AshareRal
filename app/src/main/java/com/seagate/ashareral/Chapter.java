@@ -1,18 +1,40 @@
 package com.seagate.ashareral;
 
-public class Chapter {
-    String country,location,web,person,email,phone;
+import java.io.Serializable;
+
+public class Chapter implements Serializable {
+    String country,location,web,person,email,phone,download_link,subRegion;
     int chapterNumber;
+    long timestamp;
+
+    public Chapter() {
+    }
 
     public Chapter(String country, String location, String web, String person, String email,
-                   String phone, int chapterNumber ) {
+                   String phone, String download_link, int chapterNumber, long timestamp,
+                   String subRegion) {
         this.country = country;
         this.location = location;
         this.web = web;
         this.person = person;
         this.email = email;
         this.phone = phone;
+        this.download_link = download_link;
         this.chapterNumber = chapterNumber;
+        this.timestamp = timestamp;
+        this.subRegion=subRegion;
+    }
+
+    public String getDownload_link() {
+        return download_link;
+    }
+
+    public String getSubRegion() {
+        return subRegion;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
     }
 
     public String getCountry() {

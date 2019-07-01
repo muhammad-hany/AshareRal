@@ -40,6 +40,11 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
         view.findViewById(R.id.events).setOnClickListener(this);
 
         view.findViewById(R.id.poll).setOnClickListener(this);
+        view.findViewById(R.id.chapters).setOnClickListener(this);
+        view.findViewById(R.id.committees).setOnClickListener(this);
+        view.findViewById(R.id.officers).setOnClickListener(this);
+        view.findViewById(R.id.dls).setOnClickListener(this);
+        view.findViewById(R.id.crc).setOnClickListener(this);
         navController = Navigation.findNavController(view);
 
 
@@ -58,13 +63,167 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
             case R.id.poll:
                 makePollAlertDialogue();
                 break;
+            case R.id.chapters:
+                makeChaptersDialogue();
+                break;
+            case R.id.committees:
+                makeCommitteesDialogue();
+                break;
+            case R.id.officers:
+                makeOfficersDialogue();
+                break;
+            case R.id.dls:
+                makeDlsDialogue();
+                break;
+
+            case R.id.crc:
+                makeCRCDialogue();
+
         }
+    }
+
+    private void makeCRCDialogue() {
+        Bundle bundle=new Bundle();
+        new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String[]{
+                "Add", "Edit", "Delete"}, (dialog, which) -> {
+            switch (which){
+                case 0:
+                    //add
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_ADD);
+                    navController.navigate(R.id.toCRCAdminFragment,bundle);
+                    break;
+                case 1 :
+                    //edit
+
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);
+                    navController.navigate(R.id.toCRCAdminFragment,bundle);
+                    break;
+                case 2:
+                    //delete
+
+                    break;
+
+            }
+        }).create().show();
+    }
+
+    private void makeDlsDialogue() {
+        Bundle bundle=new Bundle();
+        new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String[]{
+                "Add", "Edit", "Delete"}, (dialog, which) -> {
+            switch (which){
+                case 0:
+                    //add
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_ADD);
+                    bundle.putString(Utils.ADMIN_TYPE,Utils.DLS_KEY);
+                    navController.navigate(R.id.toChapterAdminFragment,bundle);
+                    break;
+                case 1 :
+                    //edit
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+                case 2:
+                    //delete
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_DELETE);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+
+            }
+        }).create().show();
+    }
+
+    private void makeOfficersDialogue() {
+        Bundle bundle=new Bundle();
+        new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String[]{
+                "Add", "Edit", "Delete"}, (dialog, which) -> {
+            switch (which){
+                case 0:
+                    //add
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_ADD);
+                    bundle.putString(Utils.ADMIN_TYPE,Utils.OFFICERS_KEY);
+                    navController.navigate(R.id.toChapterAdminFragment,bundle);
+                    break;
+                case 1 :
+                    //edit
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+                case 2:
+                    //delete
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_DELETE);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+
+            }
+        }).create().show();
+    }
+
+    private void makeCommitteesDialogue() {
+        Bundle bundle=new Bundle();
+        new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String[]{
+                "Add", "Edit", "Delete"}, (dialog, which) -> {
+            switch (which){
+                case 0:
+                    //add
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_ADD);
+                    bundle.putString(Utils.ADMIN_TYPE,Utils.COMMITTEE_KEY);
+                    navController.navigate(R.id.toChapterAdminFragment,bundle);
+                    break;
+                case 1 :
+                    //edit
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+                case 2:
+                    //delete
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_DELETE);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+
+            }
+        }).create().show();
+    }
+
+    private void makeChaptersDialogue() {
+        Bundle bundle=new Bundle();
+        new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String[]{
+                "Add", "Edit", "Delete"}, (dialog, which) -> {
+            switch (which){
+                case 0:
+                    //add
+                    bundle.putString(Utils.ADMIN_TYPE,Utils.CHAPTER_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_ADD);
+                    navController.navigate(R.id.toChapterAdminFragment,bundle);
+                    break;
+                case 1 :
+                    //edit
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.CHAPTER_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+                case 2:
+                    //delete
+                    bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.CHAPTER_KEY);
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_DELETE);
+                    navController.navigate(R.id.toChaptersFragment,bundle);
+                    break;
+
+            }
+        }).create().show();
     }
 
     private void makePollAlertDialogue() {
         Bundle bundle=new Bundle();
         new AlertDialog.Builder(getContext()).setTitle("Choose Action").setItems(new String [] {
-                "Create Poll","Close Poll","Edit Active Poll","Delete Poll"}, (dialog, which) -> {
+                "Create Poll","Close Poll","Publish Poll","Hide Poll","Delete Poll"},
+                (dialog, which) -> {
             switch (which){
                 case 0:
                     bundle.putString(Utils.POLL_ACTION,Utils.POLL_OPEN);
@@ -76,13 +235,20 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
                     navController.navigate(R.id.toPollListFragment,bundle);
                     break;
                 case 2:
-                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_EDIT);
+                    /*bundle.putString(Utils.POLL_ACTION,Utils.POLL_EDIT);
+                    navController.navigate(R.id.toPollListFragment,bundle);*/
+                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_PUBLISH);
                     navController.navigate(R.id.toPollListFragment,bundle);
                     break;
                 case 3 :
+                    bundle.putString(Utils.POLL_ACTION,Utils.POLL_HIDE);
+                    navController.navigate(R.id.toPollListFragment,bundle);
+                    break;
+                case 4:
                     bundle.putString(Utils.POLL_ACTION,Utils.POLL_DELETE);
                     navController.navigate(R.id.toPollListFragment,bundle);
                     break;
+
 
             }
         }).create().show();

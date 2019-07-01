@@ -3,14 +3,13 @@ package com.seagate.ashareral;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class Utils {
 
     public static final String NEWS_BODY_KEY = "body";
-    public static final String NEWS_TITLE_KEY = "title";
+    public static final String NEWS_TITLE_KEY = "position";
     public static final String NEWS_IMAGE_TIME_KEY = "image_timestamp";
     public static final String NEWS_IMAGE_URL = "image_url";
     public static final String NEWS_COLLECTION_NAME = "news";
@@ -51,7 +50,7 @@ public class Utils {
     public static final String PERSON_NAME = "name";
     public static final String PERSON_BIO = "bio";
     public static final String PERSON_EMAIL = "email";
-    public static final String PERSON_TITLE = "title";
+    public static final String PERSON_TITLE = "position";
     public static final String PERSON_COMMITTEE = "Committee";
     public static final String PERSON_COURSE = "Course Taught";
     public static final int[] committeesRes = {R.drawable.committee1, R.drawable.committee2,
@@ -81,6 +80,12 @@ public class Utils {
     public static final String POLL_DELETE = "poll_delete";
 
     public static final String[] mainFragmentTitles = {"news", "events", "CRC", "poll", "chapters", "committees", "Distinguished Lecturers", "officers"};
+    public static final String CHAPTERS_KEY = "chapters";
+    public static final String ADMIN_TYPE = "admin_type";
+    public static final String POLL_HIDE = "hide";
+    public static final String POLL_PUBLISH = "publish";
+    public static final String POLL_VIEW = "view";
+    public static final String CRC_KEY = "crc";
 
     public static int[] mainFragmentImages = {R.drawable.news, R.drawable.events, R.drawable.crc,
             R.drawable.poll, R.drawable.chapters, R.drawable.committees, R.drawable.dls,
@@ -113,21 +118,21 @@ public class Utils {
         return date;
     }
 
-    public static long getDate(String stringDate) {
+    public static Date getDate(String stringDate) {
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         try {
-            Calendar calendar=Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+
             Date date = dateFormat.parse(stringDate);
-            calendar.setTime(date);
-            return calendar.getTimeInMillis();
+
+            return date;
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return -1;
+        return null;
 
 
     }

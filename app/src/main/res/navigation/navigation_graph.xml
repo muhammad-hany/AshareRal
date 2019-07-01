@@ -68,7 +68,11 @@
         android:id="@+id/ChaptersFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
         android:label="Chapters"
-        tools:layout="@layout/fragment_chapters"/>
+        tools:layout="@layout/fragment_chapters">
+        <action
+            android:id="@+id/toChapterAdminFragment"
+            app:destination="@id/chapterAdminFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/CommitteeFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
@@ -118,6 +122,15 @@
         <action
             android:id="@+id/toPollListFragment"
             app:destination="@id/pollListFragment"/>
+        <action
+            android:id="@+id/toChapterAdminFragment"
+            app:destination="@id/chapterAdminFragment"/>
+        <action
+            android:id="@+id/toChaptersFragment"
+            app:destination="@id/ChaptersFragment"/>
+        <action
+            android:id="@+id/toCRCAdminFragment"
+            app:destination="@id/CRCAdminFragment"/>
     </fragment>
     <fragment
         android:id="@+id/adminEventsFragment"
@@ -157,7 +170,7 @@
     <fragment
         android:id="@+id/CRCFragment"
         android:name="com.seagate.ashareral.CRCFragment"
-        android:label="CRC"
+        android:label="Chapter Regional Conferences"
         tools:layout="@layout/fragment_crc"/>
     <fragment
         android:id="@+id/splashFagment"
@@ -171,9 +184,23 @@
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_mainFragment_to_newsDetails2"
-            app:destination="@id/newsDetails"/>
+            app:destination="@id/newsDetails"
+            app:popUpTo="@+id/splashFagment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/toEventsFragment"
-            app:destination="@id/eventsFragment"/>
+            app:destination="@id/eventsFragment"
+            app:popUpTo="@+id/splashFagment"
+            app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/chapterAdminFragment"
+        android:name="com.seagate.ashareral.ChapterAdminFragment"
+        android:label="fragment_chapter_admin"
+        tools:layout="@layout/fragment_chapter_admin"/>
+    <fragment
+        android:id="@+id/CRCAdminFragment"
+        android:name="com.seagate.ashareral.CRCAdminFragment"
+        android:label="fragment_crc_admin"
+        tools:layout="@layout/fragment_crc_admin"/>
 </navigation>

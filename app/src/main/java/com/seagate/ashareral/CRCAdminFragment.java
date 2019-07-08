@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -36,7 +37,7 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
 
     private static final int SPONSOR_CODE = 1;
     private static final int COVER_IMAGE_CODE = 2;
-    EditText title, describtion, packages, program, dateEdit, perioud, location;
+    EditText title, describtion, date, perioud;
     EditText[] editTexts;
     List<Uri> sponsorUris;
     Uri coverImageUri;
@@ -51,6 +52,7 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
     NavController navController;
     private DatePickerDialog.OnDateSetListener listener;
     private Calendar calendar;
+    Bundle bundle;
 
     public CRCAdminFragment() {
         // Required empty public constructor
@@ -67,7 +69,7 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        bundle = getArguments();
         setupViews(view);
 
     }
@@ -75,35 +77,48 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
     private void setupViews(View view) {
         title = view.findViewById(R.id.title);
         describtion = view.findViewById(R.id.describtion);
-        packages = view.findViewById(R.id.packages);
-        program = view.findViewById(R.id.program);
-        dateEdit = view.findViewById(R.id.date);
-        perioud = view.findViewById(R.id.perioud);
-        location = view.findViewById(R.id.location);
         upload = view.findViewById(R.id.upload);
         chooseSponser = view.findViewById(R.id.sponserButton);
         sponserContainer = view.findViewById(R.id.imagesUriContainer);
         coverImageUriText = view.findViewById(R.id.coverUri);
         chooseCoverImage = view.findViewById(R.id.chooseCoverimage);
+        date = view.findViewById(R.id.date);
+        perioud = view.findViewById(R.id.perioud);
 
-        editTexts = new EditText[]{title, describtion, packages, program, dateEdit, perioud, location};
+
+        editTexts = new EditText[]{title, describtion, title, perioud};
 
         chooseSponser.setOnClickListener(this);
         chooseCoverImage.setOnClickListener(this);
         upload.setOnClickListener(this);
-        dateEdit.setOnClickListener(this);
 
         sponsorUris = new ArrayList<>();
-        sponsorsDownloadLink=new ArrayList<>();
+        sponsorsDownloadLink = new ArrayList<>();
+        date.setOnClickListener(this);
 
-        navController= Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
 
-        calendar=Calendar.getInstance();
-         listener=
+        calendar = Calendar.getInstance();
+        listener =
                 (view1, year, month, dayOfMonth) -> {
-                    calendar.set(year,month,dayOfMonth);
-                    dateEdit.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                    calendar.set(year, month, dayOfMonth);
+                    date.setText(dayOfMonth + ":" + (month + 1) + ":" + year);
                 };
+
+
+            if (bundle.getString(Utils.ADMIN_ACTION_KEY).equals(Utils.ACTION_EDIT)) {
+                CRC crc = (CRC) bundle.getSerializable(Utils.CRC_KEY);
+                title.setText(crc.getTitle());
+                describtion.setText(crc.getDescribtion());
+                sponsorsDownloadLink = crc.getSponser_download_links();
+                if (sponsorsDownloadLink==null) sponsorsDownloadLink=new ArrayList<>();
+                coverImageDownloadLink = crc.getCoverimageDownloadLink();
+                date.setText(crc.getDate());
+                perioud.setText(String.valueOf(crc.getPerioud()));
+
+
+
+        }
 
     }
 
@@ -123,53 +138,78 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(i.createChooser(i, "choose photo"), COVER_IMAGE_CODE);
                 break;
             case R.id.upload:
-                if (isAllFieldsFilled()) {
-                    uploadImages(0);
+                if (bundle.getString(Utils.ADMIN_ACTION_KEY).equals(Utils.ACTION_EDIT)){
+                    if (coverImageUri!=null || !sponsorUris.isEmpty()){
+                        uploadImages(0);
+                    }else {
+                        uploadContent();
+                    }
+                }else {
+                    if (isAllFieldsFilled()) {
+                        uploadImages(0);
 
+                    }
                 }
+
                 break;
             case R.id.date:
-                new DatePickerDialog(getContext(),listener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-                break;
+                new DatePickerDialog(getContext(), listener, calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+
         }
     }
 
     private void uploadImages(int index) {
 
-        if (index<sponsorUris.size()) {
-            StorageReference reference = FirebaseStorage.getInstance().getReference().child(Utils.CRC_KEY).child(String.valueOf(System.currentTimeMillis()) + index);
+        if (index < sponsorUris.size()) {
+            StorageReference reference = FirebaseStorage.getInstance().getReference().child(Utils.CRC_KEY).child(String.valueOf(System.currentTimeMillis() + index));
             reference.putFile(sponsorUris.get(index)).addOnSuccessListener(taskSnapshot -> {
                 reference.getDownloadUrl().addOnSuccessListener(uri -> {
                     sponsorsDownloadLink.add(uri.toString());
                     uploadImages(index + 1);
                 });
             });
-        }else {
-            if (coverImageUri!=null){
-                StorageReference reference = FirebaseStorage.getInstance().getReference().child(Utils.CRC_KEY).child(String.valueOf(System.currentTimeMillis()) + index);
-                reference.child(Utils.CRC_KEY).child(String.valueOf(System.currentTimeMillis()+index)).putFile(coverImageUri).addOnSuccessListener(taskSnapshot -> {
+        } else {
+            if (coverImageUri != null) {
+                StorageReference reference =
+                        FirebaseStorage.getInstance().getReference().child(Utils.CRC_KEY).child(String.valueOf(System.currentTimeMillis() + index));
+                reference.putFile(coverImageUri).addOnSuccessListener(taskSnapshot -> {
                     reference.getDownloadUrl().addOnSuccessListener(uri -> {
-                        coverImageDownloadLink=uri.toString();
+                        coverImageDownloadLink = uri.toString();
                         uploadContent();
+                    }).addOnFailureListener(e -> {
+                        Log.e("ERROR", e.getMessage());
                     });
+                }).addOnFailureListener(e -> {
+                    Log.e("ERROR", e.getMessage());
                 });
+            }else if (coverImageUri==null && bundle.getString(Utils.ADMIN_ACTION_KEY).equals(Utils.ACTION_EDIT)){
+                uploadContent();
             }
 
         }
     }
 
     private void uploadContent() {
-        long timestamp=System.currentTimeMillis();
-        String [] download_link=new String[sponsorsDownloadLink.size()];
-        CRC crc=new CRC(title.getText().toString(),dateEdit.getText().toString(),
-                describtion.getText().toString(),location.getText().toString(),
-                packages.getText().toString(),program.getText().toString(),coverImageDownloadLink
-                ,timestamp,Integer.parseInt(perioud.getText().toString()),
-                sponsorsDownloadLink.toArray(download_link));
-        FirebaseFirestore.getInstance().collection(Utils.CRC_KEY).document(String.valueOf(timestamp)).set(crc).addOnSuccessListener(aVoid -> {
-            Toast.makeText(getContext(),"CRC Uploaded !",Toast.LENGTH_SHORT).show();
+        long timestamp;
+        if (bundle.getString(Utils.ADMIN_ACTION_KEY).equals(Utils.ACTION_EDIT)){
+            CRC crc = (CRC) bundle.getSerializable(Utils.CRC_KEY);
+            timestamp=crc.getTimestamp();
+        }else {
+            timestamp = System.currentTimeMillis();
+        }
+
+        CRC crc = new CRC(title.getText().toString(), describtion.getText().toString(),
+                coverImageDownloadLink, date.getText().toString(),
+                Integer.parseInt(perioud.getText().toString()),
+                timestamp,
+                sponsorsDownloadLink);
+
+        FirebaseDatabase.getInstance().getReference().child(Utils.CRC_KEY).child(String.valueOf(timestamp)).setValue(crc).addOnSuccessListener(aVoid -> {
             navController.navigateUp();
         });
+
+
     }
 
     private boolean isAllFieldsFilled() {
@@ -179,7 +219,8 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         }
-        if (sponsorUris.isEmpty() || coverImageUri == null) {
+        if (coverImageUri == null) {
+            Toast.makeText(getContext(),"You must choose cover image !",Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -198,9 +239,10 @@ public class CRCAdminFragment extends Fragment implements View.OnClickListener {
             coverImageUriText.setText(getImageName(coverImageUri));
         } else if (requestCode == SPONSOR_CODE && resultCode == Activity.RESULT_OK) {
             sponsorUris.add(data.getData());
-            TextView textView=new TextView(getContext());
+            TextView textView = new TextView(getContext());
             textView.setText(getImageName(data.getData()));
             sponserContainer.addView(textView);
+            chooseSponser.setText("Choose another sponsor image");
         }
     }
 

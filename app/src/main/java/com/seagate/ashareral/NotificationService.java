@@ -56,7 +56,9 @@ public class NotificationService extends BroadcastReceiver {
                 switch (type) {
                     case Utils.NEWS_KEY:
                         News news = task.getResult().toObject(News.class);
-                        startNewsNotification(news);
+                        if (news!=null) {
+                            startNewsNotification(news);
+                        }
                         break;
                     case Utils.EVENT_KEY:
                         String title= (String) task.getResult().get(Utils.EVENT_TITLE_KEY);

@@ -8,6 +8,12 @@
               android:orientation="vertical"
               tools:context=".NewsFragment">
 
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/new_list"
         android:layout_width="match_parent"

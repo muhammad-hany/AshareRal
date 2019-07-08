@@ -35,13 +35,13 @@
             android:id="@+id/toPollListFragment"
             app:destination="@id/pollListFragment"/>
         <action
-            android:id="@+id/toGTCFragment"
-            app:destination="@id/CRCFragment"/>
-        <action
             android:id="@+id/toSplashFragment"
             app:destination="@id/splashFagment"
             app:launchSingleTop="false"
             app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/toCRCListFragment"
+            app:destination="@id/CRCListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -81,7 +81,7 @@
     <fragment
         android:id="@+id/DlsFragment"
         android:name="com.seagate.ashareral.ChaptersFragment"
-        android:label="Distinguished Lecturers"
+        android:label="RAL Regional Lecturers:"
         tools:layout="@layout/fragment_chapters"/>
     <fragment
         android:id="@+id/OfficerFragment"
@@ -131,6 +131,9 @@
         <action
             android:id="@+id/toCRCAdminFragment"
             app:destination="@id/CRCAdminFragment"/>
+        <action
+            android:id="@+id/toCRCListFragment"
+            app:destination="@id/CRCListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/adminEventsFragment"
@@ -203,4 +206,16 @@
         android:name="com.seagate.ashareral.CRCAdminFragment"
         android:label="fragment_crc_admin"
         tools:layout="@layout/fragment_crc_admin"/>
+    <fragment
+        android:id="@+id/CRCListFragment"
+        android:name="com.seagate.ashareral.CRCListFragment"
+        android:label="Chapter Regional Conferences"
+        tools:layout="@layout/fragment_crc_list">
+        <action
+            android:id="@+id/toCRCFragment"
+            app:destination="@id/CRCFragment"/>
+        <action
+            android:id="@+id/toCRCAdminFragment"
+            app:destination="@id/CRCAdminFragment"/>
+    </fragment>
 </navigation>

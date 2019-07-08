@@ -80,7 +80,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         public NewsViewHolder(@NonNull View convertView) {
             super(convertView);
 
-            imageView=convertView.findViewById(R.id.news_image_list_item);
+            imageView=convertView.findViewById(R.id.coverImage);
             title=convertView.findViewById(R.id.title);
 
             convertView.setTag(this);

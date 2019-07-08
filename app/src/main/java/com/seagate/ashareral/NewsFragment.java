@@ -1,11 +1,11 @@
 package com.seagate.ashareral;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,10 +26,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class NewsFragment extends Fragment {
     private ArrayList<News> news;
     NavController navController;
-    private AlertDialog dialog;
     private Bundle bundle2;
     private NewsAdapter adapter;
-
+    ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +42,8 @@ public class NewsFragment extends Fragment {
 
 
         setToolBar();
+        progressBar=view.findViewById(R.id.progress);
+        progressBar.setIndeterminate(true);
 
         RecyclerView recyclerView = view.findViewById(R.id.new_list);
         recyclerView.setHasFixedSize(true);
@@ -59,16 +60,17 @@ public class NewsFragment extends Fragment {
 
 
         recyclerView.setAdapter(adapter);
-        dialog = new AlertDialog.Builder(getContext()).setMessage("Loading ..").create();
-        dialog.show();
+
         db.collection("news").get().addOnCompleteListener(task -> {
-            dialog.hide();
+
+            progressBar.setVisibility(View.INVISIBLE);
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     news.add(document.toObject(News.class));
 
 
                 }
+
                 Collections.sort(news );
                 Collections.reverse(news );
                 adapter.notifyDataSetChanged();
@@ -88,6 +90,7 @@ public class NewsFragment extends Fragment {
 
     private void setToolBar() {
         ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.news);
+
     }
 
     public void recyclerClickAction(int position){

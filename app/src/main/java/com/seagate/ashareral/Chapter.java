@@ -25,6 +25,11 @@ public class Chapter implements Serializable {
         this.subRegion=subRegion;
     }
 
+
+    public void setDownload_link(String download_link) {
+        this.download_link = download_link;
+    }
+
     public String getDownload_link() {
         return download_link;
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -31,6 +32,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     CardView cardView;
     TextView lastNewsTitle;
     private News lastNews;
+    private ImageView imageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,20 +46,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navController= Navigation.findNavController(view);
-        /*cardView=view.findViewById(R.id.lastNews);
-        lastNewsTitle =view.findViewById(R.id.lastNewsTitle);*/
+        navController = Navigation.findNavController(view);
 
-       // getLastNews();
 
         setToolBar();
-        RecyclerView recyclerView=view.findViewById(R.id.progressBar4);
+        RecyclerView recyclerView = view.findViewById(R.id.progressBar4);
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getContext(),2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        NewsAdapter adapter=new NewsAdapter(v -> {
-            NewsAdapter.NewsViewHolder holder= (NewsAdapter.NewsViewHolder) v.getTag();
+        NewsAdapter adapter = new NewsAdapter(v -> {
+            NewsAdapter.NewsViewHolder holder = (NewsAdapter.NewsViewHolder) v.getTag();
             onRecyclerClick(holder.getAdapterPosition());
         });
 
@@ -70,73 +69,89 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.bio).setOnClickListener(this);
 
 
-
-
     }
 
     private void setToolBar() {
 
 
-        Toolbar toolbar=getActivity().findViewById(R.id.toolbar);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        ImageView imageView=getActivity().findViewById(R.id.expandedImage);
-        imageView.setImageResource(R.drawable.cover);
+        imageView = getActivity().findViewById(R.id.cover);
+        imageView.setImageResource(R.drawable.ic_svgral);
+        imageView.setVisibility(View.VISIBLE);
+        ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageDrawable(null);
 
 
 
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar_layout)).setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
+        ((CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar_layout)).setCollapsedTitleTextColor(getResources().getColor(android.R.color.transparent));
+        imageView.setImageResource(R.drawable.ic_svgral);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar_layout)).setExpandedTitleColor(getResources().getColor(android.R.color.white));
+
+        ((CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar_layout)).setCollapsedTitleTextColor(getResources().getColor(android.R.color.white));
+
+        imageView.setImageDrawable(null);
+    }
 
 
     public void onRecyclerClick(int i) {
-        Bundle bundle=new Bundle();
-        switch (i){
+        Bundle bundle = new Bundle();
+        switch (i) {
             case 0:
                 navController.navigate(R.id.toNewsFragment);
                 break;
             case 1:
-                bundle.putString(Utils.CALENDAR_KEY,Utils.EVENT_KEY);
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                navController.navigate(R.id.toEventsFragment,bundle);
+                bundle.putString(Utils.CALENDAR_KEY, Utils.EVENT_KEY);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                navController.navigate(R.id.toEventsFragment, bundle);
                 break;
             case 2:
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                bundle.putString(Utils.CALENDAR_KEY,Utils.GTC_KEY);
-                navController.navigate(R.id.toGTCFragment,bundle);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                navController.navigate(R.id.toCRCListFragment, bundle);
                 break;
 
 
             case 4:
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.CHAPTER_KEY);
-                navController.navigate(R.id.toChaptersFragment,bundle);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.CHAPTER_KEY);
+                navController.navigate(R.id.toChaptersFragment, bundle);
                 break;
             case 5:
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.COMMITTEE_KEY);
-                navController.navigate(R.id.toCommitteeFragment,bundle);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.COMMITTEE_KEY);
+                navController.navigate(R.id.toCommitteeFragment, bundle);
                 break;
             case 6:
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.DLS_KEY);
-                navController.navigate(R.id.toDlsFragment,bundle);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.DLS_KEY);
+                navController.navigate(R.id.toDlsFragment, bundle);
                 break;
             case 7:
-                bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_VIEW);
-                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE,Utils.OFFICERS_KEY);
-                navController.navigate(R.id.toOfficerFragment,bundle);
+                bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
+                bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.OFFICERS_KEY);
+                navController.navigate(R.id.toOfficerFragment, bundle);
                 break;
             case 3:
-                bundle.putString(Utils.POLL_ACTION,Utils.POLL_VIEW);
-                navController.navigate(R.id.toPollListFragment,bundle);
+                bundle.putString(Utils.POLL_ACTION, Utils.POLL_VIEW);
+                navController.navigate(R.id.toPollListFragment, bundle);
                 break;
         }
     }
 
     private void getLastNews() {
-        ArrayList<News> news=new ArrayList<>();
+        ArrayList<News> news = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("news").get().addOnCompleteListener(task -> {
 
@@ -145,7 +160,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                     news.add(document.toObject(News.class));
 
                 }
-                lastNews=news.get(news.size()-1);
+                lastNews = news.get(news.size() - 1);
                 cardView.setVisibility(View.VISIBLE);
                 lastNewsTitle.setText(lastNews.getTitle());
 
@@ -156,27 +171,27 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        String url="";
-        switch (v.getId()){
+        String url = "";
+        switch (v.getId()) {
             case R.id.facebook:
-                url=Utils.FACEBOOK_LINK;
+                url = Utils.FACEBOOK_LINK;
                 break;
             case R.id.youtube:
-                url=Utils.YOUTUBR_LINK;
+                url = Utils.YOUTUBR_LINK;
                 break;
             case R.id.linkedin:
-                url=Utils.LINKEDIN;
+                url = Utils.LINKEDIN;
                 break;
             case R.id.bio:
-                url=Utils.WEB;
+                url = Utils.WEB;
                 break;
             case R.id.twitter:
-                url=Utils.TWITTER_LINK;
+                url = Utils.TWITTER_LINK;
                 break;
 
         }
 
-        Intent i =new Intent(Intent.ACTION_VIEW);
+        Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
     }

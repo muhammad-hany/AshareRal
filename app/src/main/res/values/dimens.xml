@@ -5,6 +5,6 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="grid_element_margin">7dp</dimen>
-    <dimen name="social_dimensions">10dp</dimen>
+    <dimen name="social_dimensions">5dp</dimen>
     <dimen name="social_image_dimension">50dp</dimen>
 </resources>

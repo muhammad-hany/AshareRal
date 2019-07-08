@@ -159,7 +159,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 personTextView = convertView.findViewById(R.id.person_text);
                 emailTextView = convertView.findViewById(R.id.email_text);
                 phoneTextView = convertView.findViewById(R.id.phone_text);
-                coverImage = convertView.findViewById(R.id.news_image_list_item);
+                coverImage = convertView.findViewById(R.id.coverImage);
 
             }else if (type.equals(Utils.COMMITTEE_KEY)){
                 title=convertView.findViewById(R.id.committee);
@@ -176,7 +176,7 @@ public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.MyView
                 personTitle=convertView.findViewById(R.id.person_title);
                 personCommitteeCourse=convertView.findViewById(R.id.person_committee_course);
                 personCommitteeCourse2=convertView.findViewById(R.id.person_committee_course2);
-                personImage=convertView.findViewById(R.id.news_image_list_item);
+                personImage=convertView.findViewById(R.id.coverImage);
                 personEmail=convertView.findViewById(R.id.person_email);
                 emailSubtitle=convertView.findViewById(R.id.emailSubTitle);
                 bioDescibtion=convertView.findViewById(R.id.bioDescibtion);

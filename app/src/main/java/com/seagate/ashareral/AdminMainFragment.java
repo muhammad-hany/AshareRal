@@ -96,11 +96,12 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
                     //edit
 
                     bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_EDIT);
-                    navController.navigate(R.id.toCRCAdminFragment,bundle);
+                    navController.navigate(R.id.toCRCListFragment,bundle);
                     break;
                 case 2:
                     //delete
-
+                    bundle.putString(Utils.ADMIN_ACTION_KEY,Utils.ACTION_DELETE);
+                    navController.navigate(R.id.toCRCListFragment,bundle);
                     break;
 
             }

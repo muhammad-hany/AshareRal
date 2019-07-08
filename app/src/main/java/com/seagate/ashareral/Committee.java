@@ -3,8 +3,8 @@ package com.seagate.ashareral;
 import java.io.Serializable;
 
 public class Committee implements Serializable {
-   String committee,name,position,email,bio,download_link;
-   long timestamp;
+   private String committee,name,position,email,bio,download_link;
+   private long timestamp;
 
     public Committee() {
     }
@@ -17,6 +17,10 @@ public class Committee implements Serializable {
         this.bio = bio;
         this.download_link = download_link;
         this.timestamp = timestamp;
+    }
+
+    public void setDownload_link(String download_link) {
+        this.download_link = download_link;
     }
 
     public String getDownload_link() {

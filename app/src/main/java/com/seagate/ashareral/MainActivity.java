@@ -3,6 +3,7 @@ package com.seagate.ashareral;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,6 +15,17 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -40,19 +52,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUi();
         setNotificationService();
 
-     //   organizeDatabase();
+      //  organizeDatabase();
 
 
     }
 
     private void organizeDatabase() {
-        chapterCounter = 1;
-        organizeChapters();
-        organizeOfficers();
-        organizeDls();
-        organizeCommittee();
+
+        ArrayList<Object> chapters = getDataFromJson(Utils.DLS_KEY);
+        uploadChaptersMedia(0, chapters);
+
+    }
+
+    private void uploadChaptersMedia(int index, ArrayList<Object> chapters) {
+        if (index < chapters.size()) {
+            /*Uri uri =
+                    Uri.parse("android.resource://com.seagate.ashareral/drawable/" + Utils.dlsRes[index]);*/
+            Uri uri = null;
+
+            StorageReference reference =
+                    FirebaseStorage.getInstance().getReference(Utils.DLS_KEY).child(String.valueOf(System.currentTimeMillis()));
+
+            reference.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+                reference.getDownloadUrl().addOnSuccessListener(uri1 -> {
+                    Dls chapter = (Dls) chapters.get(index);
+                    chapter.setDownload_link(uri1.toString());
+                    uploadChaptersMedia(index + 1, chapters);
+                });
 
 
+            });
+        } else {
+            uploadChapterObject(0,chapters);
+        }
+    }
+
+    private void uploadChapterObject(int index, ArrayList<Object> chapters) {
+        if (index<chapters.size()) {
+            Dls chapter = (Dls) chapters.get(index);
+
+            FirebaseDatabase.getInstance().getReference().child(Utils.DLS_KEY).child(String.valueOf(chapter.getTimestamo())).setValue(chapter).addOnSuccessListener(aVoid -> {
+                uploadChapterObject(index + 1, chapters);
+            });
+        }
     }
 
     private void organizeCommittee() {
@@ -232,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_crc:
                 bundle.putString(Utils.ADMIN_ACTION_KEY, Utils.ACTION_VIEW);
                 bundle.putString(Utils.CALENDAR_KEY, Utils.GTC_KEY);
-                navController.navigate(R.id.toGTCFragment, bundle);
+                navController.navigate(R.id.toCRCListFragment, bundle);
                 break;
             case R.id.nav_chapter:
                 bundle.putString(Utils.RECYCLER_ADAPTER_TYPE, Utils.CHAPTER_KEY);
@@ -251,6 +293,99 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navController.navigate(R.id.toOfficerFragment, bundle);
                 break;
 
+        }
+    }
+
+
+    private ArrayList<Object> getDataFromJson(String type) {
+
+        ArrayList<Object> objects = new ArrayList<>();
+
+        try {
+            InputStream inputStream = getAssets().open(type + ".json");
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            String json = new String(buffer, "UTF-8");
+
+            JSONArray jsonArray = new JSONArray(json);
+
+            Person person;
+            Chapter chapter;
+            Map<String, String> map = new HashMap<>();
+            switch (type) {
+                case Utils.CHAPTER_KEY:
+
+                    objects.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        chapter = new Chapter(obj.getString(Utils.CHAPTER_COUNTRY),
+                                obj.getString(Utils.CHAPTER_LOCATION), obj.getString(Utils.CHAPTER_WEB),
+                                obj.getString(Utils.CHAPTER_PERSON), obj.getString(Utils.CHAPTER_EMAIL),
+                                obj.getString(Utils.CHAPTER_PHONE), null,
+                                obj.getInt(Utils.CHAPTER_NUMBER), System.currentTimeMillis()+i,
+                                obj.getString(Utils.CHAPTER_SUBREGION));
+
+                        objects.add(chapter);
+
+                    }
+
+
+                    break;
+                case Utils.COMMITTEE_KEY:
+
+                    objects.clear();
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        Committee committee=new Committee(obj.getString(Utils.PERSON_COMMITTEE),
+                                obj.getString(Utils.PERSON_NAME),
+                                obj.getString(Utils.COMMITTEE_TITLE),
+                                obj.getString(Utils.PERSON_EMAIL),obj.getString(Utils.PERSON_BIO)
+                                ,null,System.currentTimeMillis()+i);
+                        objects.add(committee);
+
+                    }
+                    break;
+                case Utils.OFFICERS_KEY:
+                    objects.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        Officer officer=new Officer(obj.getString(Utils.PERSON_NAME),
+                                obj.getString(Utils.COMMITTEE_TITLE),
+                                obj.getString(Utils.PERSON_EMAIL),obj.getString(Utils.PERSON_BIO)
+                                ,null,System.currentTimeMillis()+i);
+
+                        objects.add(officer);
+
+                    }
+                    break;
+
+                case Utils.DLS_KEY:
+                    objects.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        Dls dls=new Dls(obj.getString(Utils.PERSON_NAME),
+                                obj.getString(Utils.COMMITTEE_TITLE),
+                                obj.getString(Utils.PERSON_BIO),null,
+                                obj.getString(Utils.PERSON_COURSE),System.currentTimeMillis()+i);
+
+                        objects.add(dls);
+                    }
+                    break;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+
+            return objects;
         }
     }
 }

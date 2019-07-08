@@ -53,7 +53,7 @@ public class Utils {
     public static final String PERSON_TITLE = "position";
     public static final String PERSON_COMMITTEE = "Committee";
     public static final String PERSON_COURSE = "Course Taught";
-    public static final int[] committeesRes = {R.drawable.committee1, R.drawable.committee2,
+    /*public static final int[] committeesRes = {R.drawable.committee1, R.drawable.committee2,
             R.drawable.committee3, R.drawable.committee4, R.drawable.committee5,
             R.drawable.committee6, R.drawable.committee7, R.drawable.committee8};
     public static final int[] dlsRes = {R.drawable.dls1, R.drawable.dls2, R.drawable.dls3,
@@ -68,7 +68,7 @@ public class Utils {
             R.drawable.chapter3, R.drawable.chapter4, R.drawable.chapter5, R.drawable.chapter6,
             R.drawable.chapter7, R.drawable.chapter8, R.drawable.chapter9, R.drawable.chapter10,
             R.drawable.chapter11, R.drawable.chapter12, R.drawable.chapter13, R.drawable.chapter14, R.drawable.chapter15, R.drawable.chapter16, R.drawable.chapter17, R.drawable.chapter18, R.drawable.chapter19, R.drawable.chapter20, R.drawable.chapter21, R.drawable.chapter22, R.drawable.chapter23,
-            R.drawable.chapter24, R.drawable.chapter25};
+            R.drawable.chapter24, R.drawable.chapter25};*/
 
     public static final String POLL_KEY = "poll";
     public static final String POLL_PREFRENCES_KEY = "ral_app_polls";
@@ -79,13 +79,15 @@ public class Utils {
     public static final String POLL_EDIT = "poll_edit";
     public static final String POLL_DELETE = "poll_delete";
 
-    public static final String[] mainFragmentTitles = {"news", "events", "CRC", "poll", "chapters", "committees", "Distinguished Lecturers", "officers"};
+    public static final String[] mainFragmentTitles = {"News", "Events", "CRCs", "Poll",
+            "Chapters", "Committees", "RRLs", "Officers"};
     public static final String CHAPTERS_KEY = "chapters";
     public static final String ADMIN_TYPE = "admin_type";
     public static final String POLL_HIDE = "hide";
     public static final String POLL_PUBLISH = "publish";
     public static final String POLL_VIEW = "view";
     public static final String CRC_KEY = "crc";
+    public static final String COMMITTEE_TITLE = "title";
 
     public static int[] mainFragmentImages = {R.drawable.news, R.drawable.events, R.drawable.crc,
             R.drawable.poll, R.drawable.chapters, R.drawable.committees, R.drawable.dls,

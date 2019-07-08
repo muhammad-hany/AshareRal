@@ -39,7 +39,9 @@ public class NewsDetails extends Fragment {
         AppBarLayout layout=getActivity().findViewById(R.id.appBarLayout);
         layout.setExpanded(false);
 
-        ImageView imageView=view.findViewById(R.id.news_image_list_item);
+        ((ImageView)getActivity().findViewById(R.id.expandedImage)).setImageResource(R.drawable.news);
+
+        ImageView imageView=view.findViewById(R.id.coverImage);
         TextView title=view.findViewById(R.id.title);
         TextView body=view.findViewById(R.id.body);
         TextView date=view.findViewById(R.id.date);

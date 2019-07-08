@@ -18,6 +18,10 @@ public class Officer implements Serializable {
         this.timestamp = timestamp;
     }
 
+    public void setDownload_link(String download_link) {
+        this.download_link = download_link;
+    }
+
     public String getName() {
         return name;
     }

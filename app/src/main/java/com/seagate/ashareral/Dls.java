@@ -22,6 +22,9 @@ public class Dls implements Serializable {
     public Dls() {
     }
 
+    public void setDownload_link(String download_link) {
+        this.download_link = download_link;
+    }
 
     public String getName() {
         return name;
